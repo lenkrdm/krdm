@@ -1,106 +1,174 @@
-/* ========================================
-   Kurdish Clothing Store - Main JavaScript
-   ======================================== */
+/* ============================================
+   KRDM FOR SALE — Main JS (Qream-style)
+   ============================================ */
+
+/* ---- Cursor ---- */
+const cursor = document.getElementById('cursor');
+const follower = document.getElementById('cursor-follower');
+let mx = 0, my = 0, fx = 0, fy = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top  = my + 'px';
+});
+
+(function animFollower() {
+  fx += (mx - fx) * 0.12;
+  fy += (my - fy) * 0.12;
+  follower.style.left = fx + 'px';
+  follower.style.top  = fy + 'px';
+  requestAnimationFrame(animFollower);
+})();
+
+/* ---- Loader ---- */
+const loaderFill = document.getElementById('loader-fill');
+const loader     = document.getElementById('loader');
+
+loaderFill.style.width = '100%';
+
+setTimeout(() => {
+  loader.classList.add('done');
+  document.body.style.overflow = '';
+  triggerReveal();
+}, 1400);
+
+document.body.style.overflow = 'hidden';
+
+/* ---- Nav scroll ---- */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* ---- Mobile menu ---- */
+const burger     = document.getElementById('nav-burger');
+const mobileMenu = document.getElementById('mobile-menu');
+
+function closeMobileMenu() {
+  burger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+burger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+
+/* ---- Reveal on scroll ---- */
+function triggerReveal() {
+  const els = document.querySelectorAll('.reveal-up');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const delay = parseInt(entry.target.dataset.delay || 0);
+      setTimeout(() => entry.target.classList.add('visible'), delay);
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.08 });
+
+  els.forEach(el => io.observe(el));
+}
+
+/* ---- Smooth scroll ---- */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      closeMobileMenu();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+/* ---- Product filter ---- */
+document.querySelectorAll('.filter-pill').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.work-item').forEach(item => {
+      const show = f === 'all' || item.dataset.category === f;
+      item.style.display = show ? 'block' : 'none';
+      if (show) {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(16px)';
+        setTimeout(() => {
+          item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          item.style.opacity = '1';
+          item.style.transform = 'translateY(0)';
+        }, 20);
+      }
+    });
+  });
+});
+
+/* ---- Wishlist ---- */
+function toggleWish(btn) {
+  btn.classList.toggle('active');
+  btn.textContent = btn.classList.contains('active') ? '♥' : '♡';
+  showToast(btn.classList.contains('active') ? 'Added to wishlist ♥' : 'Removed from wishlist');
+}
 
 /* ---- Cart State ---- */
-let cart = JSON.parse(localStorage.getItem('kurd_cart') || '[]');
+let cart = JSON.parse(localStorage.getItem('krdm_cart') || '[]');
 
-function saveCart() {
-  localStorage.setItem('kurd_cart', JSON.stringify(cart));
-}
+function saveCart() { localStorage.setItem('krdm_cart', JSON.stringify(cart)); }
 
-/* ---- Countdown Timer ---- */
-function initCountdown() {
-  const target = new Date();
-  target.setHours(target.getHours() + 23);
-  target.setMinutes(target.getMinutes() + 47);
-  target.setSeconds(target.getSeconds() + 12);
-
-  function update() {
-    const now = new Date();
-    const diff = target - now;
-    if (diff <= 0) return;
-
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-
-    const hEl = document.getElementById('cd-hours');
-    const mEl = document.getElementById('cd-minutes');
-    const sEl = document.getElementById('cd-seconds');
-
-    if (hEl) hEl.textContent = String(h).padStart(2, '0');
-    if (mEl) mEl.textContent = String(m).padStart(2, '0');
-    if (sEl) sEl.textContent = String(s).padStart(2, '0');
-  }
-
-  update();
-  setInterval(update, 1000);
-}
-
-/* ---- Toast Notification ---- */
-function showToast(message, icon = '✅') {
-  const toast = document.getElementById('toast');
-  if (!toast) return;
-  toast.querySelector('.toast-icon').textContent = icon;
-  toast.querySelector('.toast-msg').textContent = message;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 3000);
-}
-
-/* ---- Cart Render ---- */
 function renderCart() {
-  const cartItems = document.getElementById('cart-items');
-  const cartEmpty = document.getElementById('cart-empty');
-  const cartTotal = document.getElementById('cart-total');
-  const badge = document.getElementById('cart-badge');
+  const body      = document.getElementById('cart-body');
+  const emptyState= document.getElementById('cart-empty-state');
+  const totalEl   = document.getElementById('cart-total-price');
+  const countEl   = document.getElementById('cart-count');
+  const headCount = document.getElementById('cart-head-count');
 
-  const totalItems = cart.reduce((sum, i) => sum + i.qty, 0);
-  const totalPrice = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+  const totalPrice = cart.reduce((s, i) => s + i.price * i.qty, 0);
 
-  if (badge) badge.textContent = totalItems;
+  if (countEl)   countEl.textContent  = totalItems;
+  if (headCount) headCount.textContent = `(${totalItems})`;
+  if (totalEl)   totalEl.textContent  = totalPrice.toLocaleString('ar-IQ') + ' د.ع';
 
-  if (!cartItems) return;
+  if (!body) return;
 
   if (cart.length === 0) {
-    cartEmpty.style.display = 'flex';
-    cartItems.innerHTML = '';
+    emptyState.style.display = 'flex';
+    // remove any cart items
+    body.querySelectorAll('.cart-item').forEach(el => el.remove());
   } else {
-    cartEmpty.style.display = 'none';
-    cartItems.innerHTML = cart.map((item, index) => `
-      <div class="cart-item">
-        <div class="cart-item-img" style="background: ${item.color}">
-          ${item.emoji}
-        </div>
+    emptyState.style.display = 'none';
+    body.querySelectorAll('.cart-item').forEach(el => el.remove());
+    cart.forEach((item, i) => {
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `
+        <div class="cart-item-thumb" style="background:${item.color}20">${item.emoji}</div>
         <div class="cart-item-info">
           <div class="cart-item-name">${item.name}</div>
           <div class="cart-item-price">${(item.price * item.qty).toLocaleString('ar-IQ')} د.ع</div>
           <div class="cart-item-qty">
-            <button class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
+            <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
             <span class="qty-num">${item.qty}</span>
-            <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+            <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
           </div>
         </div>
-        <button class="cart-item-remove" onclick="removeItem(${index})" title="Remove">🗑️</button>
-      </div>
-    `).join('');
-  }
-
-  if (cartTotal) {
-    cartTotal.textContent = totalPrice.toLocaleString('ar-IQ') + ' د.ع';
+        <button class="cart-item-remove" onclick="removeItem(${i})">✕</button>
+      `;
+      body.appendChild(div);
+    });
   }
 }
 
 function addToCart(name, price, emoji, color) {
   const existing = cart.find(i => i.name === name);
-  if (existing) {
-    existing.qty++;
-  } else {
-    cart.push({ name, price, emoji, color, qty: 1 });
-  }
+  if (existing) { existing.qty++; }
+  else { cart.push({ name, price, emoji, color, qty: 1 }); }
   saveCart();
   renderCart();
-  showToast(`${name} added to cart!`, '🛍️');
+  showToast(`${emoji} Added to cart`);
 }
 
 function changeQty(index, delta) {
@@ -114,164 +182,41 @@ function removeItem(index) {
   cart.splice(index, 1);
   saveCart();
   renderCart();
-  showToast('Item removed from cart', '🗑️');
 }
 
-/* ---- Cart Sidebar ---- */
+/* ---- Cart drawer ---- */
 function openCart() {
-  document.getElementById('cart-overlay').classList.add('open');
-  document.getElementById('cart-sidebar').classList.add('open');
+  document.getElementById('cart-backdrop').classList.add('open');
+  document.getElementById('cart-drawer').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
 function closeCart() {
-  document.getElementById('cart-overlay').classList.remove('open');
-  document.getElementById('cart-sidebar').classList.remove('open');
+  document.getElementById('cart-backdrop').classList.remove('open');
+  document.getElementById('cart-drawer').classList.remove('open');
   document.body.style.overflow = '';
-}
-
-/* ---- Mobile Menu ---- */
-function toggleMobileMenu() {
-  const nav = document.getElementById('mobile-nav');
-  nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-}
-
-/* ---- Product Filter ---- */
-function filterProducts(category) {
-  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
-
-  document.querySelectorAll('.product-card').forEach(card => {
-    if (category === 'all' || card.dataset.category === category) {
-      card.style.display = 'block';
-      card.style.animation = 'fadeIn 0.4s ease';
-    } else {
-      card.style.display = 'none';
-    }
-  });
-}
-
-/* ---- Wishlist Toggle ---- */
-function toggleWishlist(btn) {
-  btn.classList.toggle('wishlisted');
-  if (btn.classList.contains('wishlisted')) {
-    btn.textContent = '❤️';
-    showToast('Added to wishlist!', '❤️');
-  } else {
-    btn.textContent = '🤍';
-    showToast('Removed from wishlist', '💔');
-  }
-}
-
-/* ---- Back to Top ---- */
-function initBackToTop() {
-  const btn = document.getElementById('back-to-top');
-  if (!btn) return;
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 400) {
-      btn.classList.add('visible');
-    } else {
-      btn.classList.remove('visible');
-    }
-  });
-
-  btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
-
-/* ---- Smooth scroll for nav links ---- */
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // close mobile nav if open
-        const mobileNav = document.getElementById('mobile-nav');
-        if (mobileNav) mobileNav.style.display = 'none';
-      }
-    });
-  });
-}
-
-/* ---- Active nav link on scroll ---- */
-function initScrollSpy() {
-  const sections = document.querySelectorAll('section[id]');
-  const links = document.querySelectorAll('.nav-links a[href^="#"]');
-
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 120) current = s.id;
-    });
-    links.forEach(a => {
-      a.classList.remove('active');
-      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
-    });
-  });
-}
-
-/* ---- Newsletter form ---- */
-function initNewsletter() {
-  const form = document.getElementById('newsletter-form');
-  if (!form) return;
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const input = form.querySelector('input');
-    if (input.value.trim()) {
-      showToast('You\'re subscribed! Check your inbox 📬', '🎉');
-      input.value = '';
-    }
-  });
-}
-
-/* ---- Animate on scroll (simple intersection observer) ---- */
-function initAnimations() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.product-card, .category-card, .feature-card, .testimonial-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(el);
-  });
 }
 
 /* ---- Checkout ---- */
 function checkout() {
-  if (cart.length === 0) {
-    showToast('Your cart is empty!', '⚠️');
-    return;
-  }
-  showToast('Redirecting to checkout... 🎉', '🛒');
+  if (!cart.length) { showToast('Your cart is empty ⚠️'); return; }
+  showToast('Processing your order...');
   setTimeout(() => {
-    cart = [];
-    saveCart();
-    renderCart();
-    closeCart();
-    showToast('Order placed successfully! Thank you! 🎊', '✅');
-  }, 1500);
+    cart = []; saveCart(); renderCart(); closeCart();
+    showToast('Order placed! Thank you 🎉');
+  }, 1800);
+}
+
+/* ---- Toast ---- */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2800);
 }
 
 /* ---- Init ---- */
 document.addEventListener('DOMContentLoaded', () => {
   renderCart();
-  initCountdown();
-  initBackToTop();
-  initSmoothScroll();
-  initScrollSpy();
-  initNewsletter();
-
-  // Delay animations slightly to avoid flash
-  setTimeout(initAnimations, 100);
 });

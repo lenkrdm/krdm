@@ -1,1091 +1,595 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Kurdish traditional clothing store — high quality fabric, vibrant colors, affordable prices. Shop women's, men's and children's traditional Kurdish outfits." />
-  <title>Kurds For Sale — Authentic Kurdish Traditional Clothing</title>
-
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👗</text></svg>" />
-
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css" />
-
-  <!-- Font Awesome CDN (icons) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KRDM FOR SALE — Kurdish Traditional Clothing</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>K</text></svg>"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
-<!-- ============================================================
-     ANNOUNCEMENT BAR
-     ============================================================ -->
-<div class="announcement-bar">
-  🎉 شحن مجاني على الطلبات فوق 75,000 د.ع · استخدم كود <strong>KURDSTYLE</strong> للحصول على خصم 15% على أول طلب! 🎉
+<!-- ░░░ CURSOR ░░░ -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursor-follower"></div>
+
+<!-- ░░░ LOADER ░░░ -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <div class="loader-logo">KRDM</div>
+    <div class="loader-bar"><div class="loader-fill" id="loader-fill"></div></div>
+  </div>
 </div>
 
-<!-- ============================================================
-     HEADER
-     ============================================================ -->
-<header>
-  <div class="nav-wrapper">
+<!-- ░░░ NAV ░░░ -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">KRDM<span>.</span></a>
+  <div class="nav-links">
+    <a href="#work" class="nav-link">Collections</a>
+    <a href="#services" class="nav-link">Products</a>
+    <a href="#about" class="nav-link">Story</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
+  <button class="nav-cart" id="nav-cart-btn" onclick="openCart()">
+    Cart <span class="cart-count" id="cart-count">0</span>
+  </button>
+  <button class="nav-burger" id="nav-burger">
+    <span></span><span></span>
+  </button>
+</nav>
 
-    <!-- Logo -->
-    <a href="#" class="logo">
-      <div class="logo-icon">👗</div>
-      <div class="logo-text">
-        <div class="brand">Kurds For Sale</div>
-        <div class="tagline">Traditional Kurdish Fashion</div>
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#work"     onclick="closeMobileMenu()">Collections</a>
+  <a href="#services" onclick="closeMobileMenu()">Products</a>
+  <a href="#about"    onclick="closeMobileMenu()">Story</a>
+  <a href="#contact"  onclick="closeMobileMenu()">Contact</a>
+</div>
+
+<!-- ░░░ HERO ░░░ -->
+<section class="hero" id="hero">
+  <div class="hero-bg-text" aria-hidden="true">KURDISH</div>
+
+  <div class="hero-content">
+    <div class="hero-tag reveal-up">Traditional Heritage — New Collection 2026</div>
+    <h1 class="hero-title">
+      <span class="line reveal-up" data-delay="0">Wear the</span>
+      <span class="line line-italic reveal-up" data-delay="100">Colors of</span>
+      <span class="line reveal-up" data-delay="200">Kurdistan<span class="dot">.</span></span>
+    </h1>
+    <div class="hero-bottom reveal-up" data-delay="400">
+      <p class="hero-desc">Authentic handcrafted traditional Kurdish clothing — rich fabric, vibrant patterns, and timeless style worn by generations.</p>
+      <a href="#work" class="btn-main">
+        <span>Shop Now</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats reveal-up" data-delay="500">
+    <div class="stat">
+      <span class="stat-num">500<sup>+</sup></span>
+      <span class="stat-label">Products</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-num">10K<sup>+</sup></span>
+      <span class="stat-label">Customers</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-num">30<sup>+</sup></span>
+      <span class="stat-label">Countries</span>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"><div class="scroll-dot"></div></div>
+  </div>
+</section>
+
+<!-- ░░░ MARQUEE ░░░ -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>WOMEN'S COLLECTION</span><span class="dot-sep">✦</span>
+    <span>MEN'S TRADITIONAL</span><span class="dot-sep">✦</span>
+    <span>CHILDREN'S WEAR</span><span class="dot-sep">✦</span>
+    <span>BRIDAL GOWNS</span><span class="dot-sep">✦</span>
+    <span>ACCESSORIES</span><span class="dot-sep">✦</span>
+    <span>NEW ARRIVALS 2026</span><span class="dot-sep">✦</span>
+    <span>WOMEN'S COLLECTION</span><span class="dot-sep">✦</span>
+    <span>MEN'S TRADITIONAL</span><span class="dot-sep">✦</span>
+    <span>CHILDREN'S WEAR</span><span class="dot-sep">✦</span>
+    <span>BRIDAL GOWNS</span><span class="dot-sep">✦</span>
+    <span>ACCESSORIES</span><span class="dot-sep">✦</span>
+    <span>NEW ARRIVALS 2026</span><span class="dot-sep">✦</span>
+  </div>
+</div>
+
+<!-- ░░░ WHAT WE DO ░░░ -->
+<section class="services" id="services">
+  <div class="section-label reveal-up">What we offer</div>
+  <div class="services-grid">
+
+    <div class="service-item reveal-up" data-delay="0">
+      <div class="service-num">01</div>
+      <div class="service-body">
+        <h3>Women's Collection</h3>
+        <p>Elegant traditional dresses, blouses, and full sets crafted with premium fabric and vivid Kurdish embroidery patterns.</p>
+        <a href="#work" class="service-link">Browse <span>→</span></a>
       </div>
+    </div>
+
+    <div class="service-item reveal-up" data-delay="100">
+      <div class="service-num">02</div>
+      <div class="service-body">
+        <h3>Men's Attire</h3>
+        <p>Classic Kurdish suits, vests, and ceremonial wear tailored for comfort and cultural pride at every occasion.</p>
+        <a href="#work" class="service-link">Browse <span>→</span></a>
+      </div>
+    </div>
+
+    <div class="service-item reveal-up" data-delay="200">
+      <div class="service-num">03</div>
+      <div class="service-body">
+        <h3>Children's Wear</h3>
+        <p>Soft, vibrant traditional outfits for kids — from baby sets to teenage ceremony wear. Designed for comfort and culture.</p>
+        <a href="#work" class="service-link">Browse <span>→</span></a>
+      </div>
+    </div>
+
+    <div class="service-item reveal-up" data-delay="300">
+      <div class="service-num">04</div>
+      <div class="service-body">
+        <h3>Bridal & Ceremony</h3>
+        <p>Gold-embroidered bridal gowns and limited ceremonial pieces handcrafted by master artisans from Erbil.</p>
+        <a href="#work" class="service-link">Browse <span>→</span></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ░░░ PRODUCTS ░░░ -->
+<section class="work" id="work">
+  <div class="work-header">
+    <div class="section-label reveal-up">Featured products</div>
+    <div class="work-filter reveal-up">
+      <button class="filter-pill active" data-filter="all">All</button>
+      <button class="filter-pill" data-filter="women">Women's</button>
+      <button class="filter-pill" data-filter="men">Men's</button>
+      <button class="filter-pill" data-filter="children">Children's</button>
+      <button class="filter-pill" data-filter="bridal">Bridal</button>
+      <button class="filter-pill" data-filter="accessories">Accessories</button>
+    </div>
+  </div>
+
+  <div class="work-grid" id="work-grid">
+
+    <!-- PRODUCT 1 -->
+    <article class="work-item reveal-up" data-category="women" data-delay="0">
+      <div class="work-img" style="background:linear-gradient(135deg,#1a0505 0%,#5c0f0f 50%,#c0392b 100%)">
+        <span class="work-emoji">👗</span>
+        <div class="work-overlay">
+          <button class="work-add" onclick="addToCart('فستان ديلان التقليدي', 51000, '👗','#c0392b')">Add to Cart</button>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="work-meta">
+          <span class="work-cat">Women's Dress</span>
+          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
+        </div>
+        <h4 class="work-name">Dilan Traditional Dress</h4>
+        <div class="work-price">
+          <span class="price-now">51,000 د.ع</span>
+          <span class="price-was">72,000 د.ع</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCT 2 -->
+    <article class="work-item reveal-up" data-category="women" data-delay="100">
+      <div class="work-img" style="background:linear-gradient(135deg,#021a06 0%,#0d4a18 50%,#2d7a35 100%)">
+        <span class="work-emoji">👘</span>
+        <div class="work-overlay">
+          <button class="work-add" onclick="addToCart('بلوزة گولê المطرزة', 39000, '👘','#2d7a35')">Add to Cart</button>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="work-meta">
+          <span class="work-cat">Women's Blouse</span>
+          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
+        </div>
+        <h4 class="work-name">Gulê Embroidered Blouse</h4>
+        <div class="work-price">
+          <span class="price-now">39,000 د.ع</span>
+          <span class="price-was">58,000 د.ع</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCT 3 -->
+    <article class="work-item reveal-up" data-category="men" data-delay="200">
+      <div class="work-img" style="background:linear-gradient(135deg,#020818 0%,#0a1f5c 50%,#2563eb 100%)">
+        <span class="work-emoji">🧥</span>
+        <div class="work-overlay">
+          <button class="work-add" onclick="addToCart('صدرية كارزان الكلاسيكية', 59000, '🧥','#2563eb')">Add to Cart</button>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="work-meta">
+          <span class="work-cat">Men's Vest</span>
+          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
+        </div>
+        <h4 class="work-name">Karwan Classic Vest</h4>
+        <div class="work-price">
+          <span class="price-now">59,000 د.ع</span>
+          <span class="price-was">81,000 د.ع</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCT 4 — CHILDREN BANNER -->
+    <article class="work-item work-item--wide reveal-up" data-category="children" data-delay="0">
+      <div class="work-img work-img--feature" style="background:linear-gradient(135deg,#0d001a 0%,#3a0a5c 50%,#8B2DB8 100%)">
+        <div class="feature-label">Children's Collection ✦</div>
+        <span class="work-emoji work-emoji--xl">👦👧</span>
+        <div class="work-overlay">
+          <button class="work-add" onclick="addToCart('طقم شيرين الكردي', 33000,'🧒','#8B2DB8')">Add to Cart</button>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="work-meta">
+          <span class="work-cat">Children's Outfit — Best Seller</span>
+          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
+        </div>
+        <h4 class="work-name">Şirine Mini Kurdish Set</h4>
+        <div class="work-price">
+          <span class="price-now">33,000 د.ع</span>
+          <span class="price-was">46,000 د.ع</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCT 5 -->
+    <article class="work-item reveal-up" data-category="children" data-delay="100">
+      <div class="work-img" style="background:linear-gradient(135deg,#1a0a00 0%,#5c3000 50%,#e05a2b 100%)">
+        <span class="work-emoji">👧</span>
+        <div class="work-overlay">
+          <button class="work-add" onclick="addToCart('فستان رووناك للبنات', 28000,'👧','#e05a2b')">Add to Cart</button>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="work-meta">
+          <span class="work-cat">Girls' Dress</span>
+          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
+        </div>
+        <h4 class="work-name">Roonak Girls' Dress</h4>
+        <div class="work-price">
+          <span class="price-now">28,000 د.ع</span>
+          <span class="price-was">40,000 د.ع</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCT 6 -->
+    <article class="work-item reveal-up" data-category="children" data-delay="200">
+      <div class="work-img" style="background:linear-gradient(135deg,#001a0d 0%,#005c3a 50%,#1a9e6b 100%)">
+        <span class="work-emoji">👦</span>
+        <div class="work-overlay">
+          <button class="work-add" onclick="addToCart('بدلة هاوار للأولاد', 36000,'👦','#1a9e6b')">Add to Cart</button>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="work-meta">
+          <span class="work-cat">Boys' Suit</span>
+          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
+        </div>
+        <h4 class="work-name">Hawar Boys' Traditional Suit</h4>
+        <div class="work-price">
+          <span class="price-now">36,000 د.ع</span>
+          <span class="price-was">52,000 د.ع</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCT 7 -->
+    <article class="work-item reveal-up" data-category="children" data-delay="300">
+      <div class="work-img" style="background:linear-gradient(135deg,#001a1a 0%,#005c5c 50%,#2ab8b8 100%)">
+        <span class="work-emoji">👶</span>
+        <div class="work-overlay">
+          <button class="work-add" onclick="addToCart('طقم بيري للرضع', 22000,'👶','#2ab8b8')">Add to Cart</button>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="work-meta">
+          <span class="work-cat">Baby Set</span>
+          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
+        </div>
+        <h4 class="work-name">Peri Baby Embroidered Set</h4>
+        <div class="work-price">
+          <span class="price-now">22,000 د.ع</span>
+          <span class="price-was">32,000 د.ع</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCT 8 -->
+    <article class="work-item reveal-up" data-category="children" data-delay="400">
+      <div class="work-img" style="background:linear-gradient(135deg,#1a1200 0%,#5c4000 50%,#d4891a 100%)">
+        <span class="work-emoji">🎀</span>
+        <div class="work-overlay">
+          <button class="work-add" onclick="addToCart('طقم زيان للأفراح', 48000,'🎀','#d4891a')">Add to Cart</button>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="work-meta">
+          <span class="work-cat">Children's Wedding</span>
+          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
+        </div>
+        <h4 class="work-name">Zian Wedding Ceremony Set</h4>
+        <div class="work-price">
+          <span class="price-now">48,000 د.ع</span>
+          <span class="price-was">68,000 د.ع</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCT 9 -->
+    <article class="work-item reveal-up" data-category="bridal" data-delay="0">
+      <div class="work-img" style="background:linear-gradient(135deg,#1a0f00 0%,#5c3800 50%,#c07820 100%)">
+        <span class="work-emoji">👰</span>
+        <div class="work-overlay">
+          <button class="work-add" onclick="addToCart('ثوب زاريين للعرائس', 118000,'👰','#c07820')">Add to Cart</button>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="work-meta">
+          <span class="work-cat">Bridal — Limited</span>
+          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
+        </div>
+        <h4 class="work-name">Zarîn Bridal Gown</h4>
+        <div class="work-price">
+          <span class="price-now">118,000 د.ع</span>
+          <span class="price-was">183,000 د.ع</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCT 10 -->
+    <article class="work-item reveal-up" data-category="accessories" data-delay="0">
+      <div class="work-img" style="background:linear-gradient(135deg,#0f0a00 0%,#4a3000 50%,#b8860b 100%)">
+        <span class="work-emoji">💎</span>
+        <div class="work-overlay">
+          <button class="work-add" onclick="addToCart('حزام الرأس الكردستاني', 26000,'💎','#b8860b')">Add to Cart</button>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="work-meta">
+          <span class="work-cat">Accessories</span>
+          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
+        </div>
+        <h4 class="work-name">Kurdistani Headdress Belt</h4>
+        <div class="work-price">
+          <span class="price-now">26,000 د.ع</span>
+          <span class="price-was">37,000 د.ع</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCT 11 -->
+    <article class="work-item reveal-up" data-category="men" data-delay="100">
+      <div class="work-img" style="background:linear-gradient(135deg,#030f03 0%,#0d3a0d 50%,#2d5a1a 100%)">
+        <span class="work-emoji">🥻</span>
+        <div class="work-overlay">
+          <button class="work-add" onclick="addToCart('بدلة هيوا الاحتفالية', 72000,'🥻','#2d5a1a')">Add to Cart</button>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="work-meta">
+          <span class="work-cat">Men's Suit</span>
+          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
+        </div>
+        <h4 class="work-name">Hiwa Celebration Suit</h4>
+        <div class="work-price">
+          <span class="price-now">72,000 د.ع</span>
+          <span class="price-was">102,000 د.ع</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PRODUCT 12 -->
+    <article class="work-item reveal-up" data-category="women" data-delay="300">
+      <div class="work-img" style="background:linear-gradient(135deg,#180515 0%,#500a40 50%,#9e1b6e 100%)">
+        <span class="work-emoji">🩱</span>
+        <div class="work-overlay">
+          <button class="work-add" onclick="addToCart('بلوزة ريوشن المخملية', 43000,'🩱','#9e1b6e')">Add to Cart</button>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="work-meta">
+          <span class="work-cat">Women's Top</span>
+          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
+        </div>
+        <h4 class="work-name">Rewşen Velvet Top</h4>
+        <div class="work-price">
+          <span class="price-now">43,000 د.ع</span>
+          <span class="price-was">63,000 د.ع</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ░░░ ABOUT STRIP ░░░ -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-left reveal-up">
+      <div class="section-label">Our story</div>
+      <h2 class="about-title">Born from<br/><em>Kurdistan.</em><br/>Made for the world.</h2>
+    </div>
+    <div class="about-right reveal-up" data-delay="150">
+      <p>We are a Kurdish heritage clothing brand based in Erbil, Kurdistan Region. Every piece we sell tells a story — a story of mountains, colors, and generations of craftsmanship.</p>
+      <p>We believe traditional clothing shouldn't cost a fortune. Our mission is to make authentic Kurdish fashion accessible to Kurds everywhere, from Erbil to Berlin to Los Angeles.</p>
+      <div class="about-awards">
+        <div class="award-item">
+          <span class="award-num">500+</span>
+          <span class="award-text">Products available</span>
+        </div>
+        <div class="award-item">
+          <span class="award-num">10K+</span>
+          <span class="award-text">Happy customers</span>
+        </div>
+        <div class="award-item">
+          <span class="award-num">30+</span>
+          <span class="award-text">Countries shipped</span>
+        </div>
+        <div class="award-item">
+          <span class="award-num">5★</span>
+          <span class="award-text">Average review</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ REVIEWS MARQUEE ░░░ -->
+<div class="reviews-wrap">
+  <div class="reviews-track">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>"The fabric quality is incredible. Everyone at Nowruz was asking where I got it."</p>
+      <span>— Sara M., Germany</span>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>"Best price for authentic Kurdish clothing I've ever found online."</p>
+      <span>— Ahmad K., Sweden</span>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>"Ordered kids' outfits for a wedding — perfect. Fast shipping, beautiful packaging."</p>
+      <span>— Lana R., UK</span>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>"My mother said 'just like back home.' That's the highest compliment possible."</p>
+      <span>— Heval A., USA</span>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>"The red Dilan dress is stunning. So worth it at this price!"</p>
+      <span>— Rêzan O., Netherlands</span>
+    </div>
+    <!-- duplicate for seamless loop -->
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>"The fabric quality is incredible. Everyone at Nowruz was asking where I got it."</p>
+      <span>— Sara M., Germany</span>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>"Best price for authentic Kurdish clothing I've ever found online."</p>
+      <span>— Ahmad K., Sweden</span>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>"Ordered kids' outfits for a wedding — perfect. Fast shipping, beautiful packaging."</p>
+      <span>— Lana R., UK</span>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>"My mother said 'just like back home.' That's the highest compliment possible."</p>
+      <span>— Heval A., USA</span>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>"The red Dilan dress is stunning. So worth it at this price!"</p>
+      <span>— Rêzan O., Netherlands</span>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ CTA ░░░ -->
+<section class="cta-section">
+  <div class="cta-inner reveal-up">
+    <h2 class="cta-title">Ready to wear<br/><em>your heritage?</em></h2>
+    <a href="#work" class="btn-main btn-main--light">
+      <span>Start Shopping</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
-
-    <!-- Desktop Nav -->
-    <nav class="nav-links">
-      <a href="#home"         class="active">Home</a>
-      <a href="#categories">Categories</a>
-      <a href="#products">Shop</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <!-- Nav Actions -->
-    <div class="nav-actions">
-      <button class="nav-btn" title="Search">🔍</button>
-      <button class="nav-btn" title="Wishlist">🤍</button>
-      <button class="nav-btn cart-btn" onclick="openCart()" title="Shopping Cart">
-        🛒
-        <span class="cart-badge" id="cart-badge">0</span>
-      </button>
-      <button class="mobile-menu-btn nav-btn" onclick="toggleMobileMenu()" title="Menu">☰</button>
-    </div>
-  </div>
-
-  <!-- Mobile Nav -->
-  <nav class="mobile-nav" id="mobile-nav">
-    <a href="#home">🏠 Home</a>
-    <a href="#categories">📂 Categories</a>
-    <a href="#products">🛍️ Shop</a>
-    <a href="#about">ℹ️ About</a>
-    <a href="#contact">📞 Contact</a>
-  </nav>
-</header>
-
-<!-- ============================================================
-     HERO SECTION
-     ============================================================ -->
-<section class="hero" id="home">
-  <div class="hero-bg-pattern"></div>
-  <div class="hero-shapes">
-    <div class="hero-shape hero-shape-1"></div>
-    <div class="hero-shape hero-shape-2"></div>
-    <div class="hero-shape hero-shape-3"></div>
-  </div>
-
-  <div class="hero-container container">
-
-    <!-- Left: Text -->
-    <div class="hero-text">
-      <div class="hero-badge">
-        🌿 New Collection 2026
-      </div>
-
-      <h1 class="hero-title">
-        Wear the Colors of<br/>
-        <span class="highlight">Kurdish Heritage</span>
-      </h1>
-
-      <p class="hero-desc">
-        Authentic, handcrafted traditional Kurdish clothing — rich fabric, vibrant patterns, and timeless style. Worn by generations, loved by all.
-      </p>
-
-      <div class="hero-cta">
-        <a href="#products" class="btn-primary">Shop Now →</a>
-        <a href="#categories" class="btn-outline">Explore Collections</a>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-num">500+</div>
-          <div class="stat-label">Products</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">10K+</div>
-          <div class="stat-label">Happy Customers</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">30+</div>
-          <div class="stat-label">Countries Shipped</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right: Visual -->
-    <div class="hero-visual">
-      <div class="hero-card-stack">
-        <!-- Background cards -->
-        <div class="hero-card hero-card-left">
-          <div class="hero-card-inner">
-            <div class="dress-icon">🧥</div>
-            <div class="dress-label">Men's Collection</div>
-          </div>
-        </div>
-        <div class="hero-card hero-card-right">
-          <div class="hero-card-inner">
-            <div class="dress-icon">👘</div>
-            <div class="dress-label">Children's Wear</div>
-          </div>
-        </div>
-        <!-- Main card -->
-        <div class="hero-card hero-card-main">
-          <div class="hero-card-inner">
-            <div class="dress-icon">👗</div>
-            <div class="dress-label">Women's Collection</div>
-          </div>
-        </div>
-
-        <!-- Floating tags -->
-        <div class="hero-floating-tag tag-1">
-          <span class="tag-icon">⭐</span>
-          <span>4.9/5 Rating</span>
-        </div>
-        <div class="hero-floating-tag tag-2">
-          <span class="tag-icon">🚚</span>
-          <span>شحن مجاني +75,000 د.ع</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<!-- ============================================================
-     FEATURES BAR
-     ============================================================ -->
-<section class="features" id="features">
-  <div class="container">
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon-wrap">🧵</div>
-        <div class="feature-title">Premium Fabric</div>
-        <div class="feature-desc">Hand-selected high-quality materials with traditional Kurdish weaving techniques passed down for centuries.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon-wrap">🎨</div>
-        <div class="feature-title">Vibrant Colors</div>
-        <div class="feature-desc">Over 20 bold, authentic colors inspired by nature and Kurdish tradition — colors that never fade.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon-wrap">💰</div>
-        <div class="feature-title">Affordable Prices</div>
-        <div class="feature-desc">Traditional clothing shouldn't cost a fortune. We keep prices low without compromising on quality.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon-wrap">🚚</div>
-        <div class="feature-title">توصيل سريع لكل العالم</div>
-        <div class="feature-desc">نوصل لأكثر من 30 دولة خلال 5–10 أيام عمل. شحن مجاني على الطلبات فوق 75,000 د.ع.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon-wrap">🔄</div>
-        <div class="feature-title">Easy Returns</div>
-        <div class="feature-desc">30-day hassle-free return policy. If you're not happy, we'll make it right — no questions asked.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     CATEGORIES SECTION
-     ============================================================ -->
-<section class="categories" id="categories">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">Browse by Category</div>
-      <h2 class="section-title">Our Collections</h2>
-      <p class="section-subtitle">From elegant women's dresses to traditional men's attire and adorable children's outfits</p>
-    </div>
-
-    <div class="categories-grid">
-
-      <div class="category-card" onclick="filterProductsByCategory('women')">
-        <div class="cat-bg cat-bg-1">
-          <div class="cat-icon">👗</div>
-          <div class="cat-info">
-            <div class="cat-name">Women's</div>
-            <div class="cat-count">142 items</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="category-card" onclick="filterProductsByCategory('men')">
-        <div class="cat-bg cat-bg-2">
-          <div class="cat-icon">🧥</div>
-          <div class="cat-info">
-            <div class="cat-name">Men's</div>
-            <div class="cat-count">98 items</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="category-card" onclick="filterProductsByCategory('children')">
-        <div class="cat-bg cat-bg-3">
-          <div class="cat-icon">👦</div>
-          <div class="cat-info">
-            <div class="cat-name">Children's</div>
-            <div class="cat-count">76 items</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="category-card" onclick="filterProductsByCategory('accessories')">
-        <div class="cat-bg cat-bg-4">
-          <div class="cat-icon">💎</div>
-          <div class="cat-info">
-            <div class="cat-name">Accessories</div>
-            <div class="cat-count">54 items</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="category-card" onclick="filterProductsByCategory('bridal')">
-        <div class="cat-bg cat-bg-5">
-          <div class="cat-icon">👰</div>
-          <div class="cat-info">
-            <div class="cat-name">Bridal</div>
-            <div class="cat-count">36 items</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     PRODUCTS SECTION
-     ============================================================ -->
-<section class="products" id="products">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">Our Products</div>
-      <h2 class="section-title">Featured Items</h2>
-      <p class="section-subtitle">Handpicked traditional Kurdish clothing with premium quality and beautiful designs</p>
-    </div>
-
-    <!-- Filter Buttons -->
-    <div class="products-filter">
-      <button class="filter-btn active" onclick="filterProducts('all')">All Items</button>
-      <button class="filter-btn" onclick="filterProducts('women')">Women's</button>
-      <button class="filter-btn" onclick="filterProducts('men')">Men's</button>
-      <button class="filter-btn" onclick="filterProducts('children')">Children's</button>
-      <button class="filter-btn" onclick="filterProducts('accessories')">Accessories</button>
-      <button class="filter-btn" onclick="filterProducts('bridal')">Bridal</button>
-    </div>
-
-    <!-- Products Grid -->
-    <div class="products-grid" id="products-grid">
-
-      <!-- Product 1 -->
-      <div class="product-card" data-category="women">
-        <div class="product-img-wrap">
-          <div class="product-img-placeholder" style="background: linear-gradient(145deg,#8B1A1A,#C0392B);">
-            <span>👗</span>
-          </div>
-          <span class="product-badge badge-new">New</span>
-          <div class="product-actions">
-            <button class="action-btn" onclick="toggleWishlist(this)" title="Wishlist">🤍</button>
-            <button class="action-btn" title="Quick View">👁️</button>
-          </div>
-        </div>
-        <div class="product-info">
-          <div class="product-category">Women's Dress</div>
-          <div class="product-name">Dilan Traditional Dress — Red Crimson</div>
-          <div class="product-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-count">(128)</span>
-          </div>
-          <div class="product-colors">
-            <div class="color-dot" style="background:#C0392B;" title="Red"></div>
-            <div class="color-dot" style="background:#1a4a99;" title="Navy"></div>
-            <div class="color-dot" style="background:#2d7a35;" title="Green"></div>
-            <div class="color-dot" style="background:#5a1a6b;" title="Purple"></div>
-          </div>
-          <div class="product-footer">
-            <div class="product-price">
-              <span class="price-current">51,000 د.ع</span>
-              <span class="price-old">72,000 د.ع</span>
-            </div>
-            <button class="add-to-cart" onclick="addToCart('Dilan Traditional Dress', 51000, '👗', 'linear-gradient(145deg,#8B1A1A,#C0392B)')">
-              🛒 Add
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 2 -->
-      <div class="product-card" data-category="women">
-        <div class="product-img-wrap">
-          <div class="product-img-placeholder" style="background: linear-gradient(145deg,#1a4a1e,#2d7a35);">
-            <span>👘</span>
-          </div>
-          <span class="product-badge badge-sale">Sale</span>
-          <div class="product-actions">
-            <button class="action-btn" onclick="toggleWishlist(this)" title="Wishlist">🤍</button>
-            <button class="action-btn" title="Quick View">👁️</button>
-          </div>
-        </div>
-        <div class="product-info">
-          <div class="product-category">Women's Blouse</div>
-          <div class="product-name">Gulê Embroidered Blouse — Forest Green</div>
-          <div class="product-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-count">(94)</span>
-          </div>
-          <div class="product-colors">
-            <div class="color-dot" style="background:#2d7a35;" title="Green"></div>
-            <div class="color-dot" style="background:#C0392B;" title="Red"></div>
-            <div class="color-dot" style="background:#c07820;" title="Gold"></div>
-          </div>
-          <div class="product-footer">
-            <div class="product-price">
-              <span class="price-current">39,000 د.ع</span>
-              <span class="price-old">58,000 د.ع</span>
-            </div>
-            <button class="add-to-cart" onclick="addToCart('Gulê Embroidered Blouse', 39000, '👘', 'linear-gradient(145deg,#1a4a1e,#2d7a35)')">
-              🛒 Add
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 3 -->
-      <div class="product-card" data-category="men">
-        <div class="product-img-wrap">
-          <div class="product-img-placeholder" style="background: linear-gradient(145deg,#1a2a6b,#2563eb);">
-            <span>🧥</span>
-          </div>
-          <span class="product-badge badge-hot">Hot</span>
-          <div class="product-actions">
-            <button class="action-btn" onclick="toggleWishlist(this)" title="Wishlist">🤍</button>
-            <button class="action-btn" title="Quick View">👁️</button>
-          </div>
-        </div>
-        <div class="product-info">
-          <div class="product-category">Men's Jacket</div>
-          <div class="product-name">Karwan Classic Vest — Royal Blue</div>
-          <div class="product-rating">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-count">(67)</span>
-          </div>
-          <div class="product-colors">
-            <div class="color-dot" style="background:#2563eb;" title="Blue"></div>
-            <div class="color-dot" style="background:#1a1a2e;" title="Black"></div>
-            <div class="color-dot" style="background:#C0392B;" title="Red"></div>
-          </div>
-          <div class="product-footer">
-            <div class="product-price">
-              <span class="price-current">59,000 د.ع</span>
-              <span class="price-old">81,000 د.ع</span>
-            </div>
-            <button class="add-to-cart" onclick="addToCart('Karwan Classic Vest', 59000, '🧥', 'linear-gradient(145deg,#1a2a6b,#2563eb)')">
-              🛒 Add
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- ===== CHILDREN'S SECTION HEADER ===== -->
-      <div class="children-section-banner" data-category="children">
-        <div class="children-banner-inner">
-          <div class="children-banner-emoji">👦👧🎀</div>
-          <div class="children-banner-text">
-            <h3>✨ قسم ملابس الأطفال الكردية ✨</h3>
-            <p>أجمل الأزياء التقليدية الكردية للأطفال — قماش ناعم، ألوان زاهية، وأسعار مناسبة!</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 4a: Şirine Mini Set -->
-      <div class="product-card children-card" data-category="children">
-        <div class="product-img-wrap">
-          <div class="product-img-placeholder" style="background: linear-gradient(145deg,#5a1a6b,#8B2DB8);">
-            <span>🧒</span>
-          </div>
-          <span class="product-badge badge-hot">الأكثر مبيعاً</span>
-          <div class="product-actions">
-            <button class="action-btn" onclick="toggleWishlist(this)" title="Wishlist">🤍</button>
-            <button class="action-btn" title="Quick View">👁️</button>
-          </div>
-        </div>
-        <div class="product-info">
-          <div class="product-category">طقم أطفال</div>
-          <div class="product-name">طقم شيرين الكردي المصغر — بنفسجي</div>
-          <div class="product-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-count">(211)</span>
-          </div>
-          <div class="product-colors">
-            <div class="color-dot" style="background:#8B2DB8;" title="بنفسجي"></div>
-            <div class="color-dot" style="background:#C0392B;" title="أحمر"></div>
-            <div class="color-dot" style="background:#2d7a35;" title="أخضر"></div>
-            <div class="color-dot" style="background:#c07820;" title="ذهبي"></div>
-          </div>
-          <div class="product-footer">
-            <div class="product-price">
-              <span class="price-current">33,000 د.ع</span>
-              <span class="price-old">46,000 د.ع</span>
-            </div>
-            <button class="add-to-cart" onclick="addToCart('طقم شيرين الكردي المصغر', 33000, '🧒', 'linear-gradient(145deg,#5a1a6b,#8B2DB8)')">
-              🛒 أضف
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 4b: Girl Traditional Dress -->
-      <div class="product-card children-card" data-category="children">
-        <div class="product-img-wrap">
-          <div class="product-img-placeholder" style="background: linear-gradient(145deg,#8B1A1A,#e05a2b);">
-            <span>👧</span>
-          </div>
-          <span class="product-badge badge-new">جديد</span>
-          <div class="product-actions">
-            <button class="action-btn" onclick="toggleWishlist(this)" title="Wishlist">🤍</button>
-            <button class="action-btn" title="Quick View">👁️</button>
-          </div>
-        </div>
-        <div class="product-info">
-          <div class="product-category">فستان بنات</div>
-          <div class="product-name">فستان رووناك الكردي للبنات — أحمر برتقالي</div>
-          <div class="product-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-count">(98)</span>
-          </div>
-          <div class="product-colors">
-            <div class="color-dot" style="background:#e05a2b;" title="برتقالي"></div>
-            <div class="color-dot" style="background:#C0392B;" title="أحمر"></div>
-            <div class="color-dot" style="background:#1a4a99;" title="أزرق"></div>
-          </div>
-          <div class="product-footer">
-            <div class="product-price">
-              <span class="price-current">28,000 د.ع</span>
-              <span class="price-old">40,000 د.ع</span>
-            </div>
-            <button class="add-to-cart" onclick="addToCart('فستان رووناك للبنات', 28000, '👧', 'linear-gradient(145deg,#8B1A1A,#e05a2b)')">
-              🛒 أضف
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 4c: Boy Traditional Suit -->
-      <div class="product-card children-card" data-category="children">
-        <div class="product-img-wrap">
-          <div class="product-img-placeholder" style="background: linear-gradient(145deg,#1a3a6b,#1a6b4a);">
-            <span>👦</span>
-          </div>
-          <span class="product-badge badge-sale">خصم</span>
-          <div class="product-actions">
-            <button class="action-btn" onclick="toggleWishlist(this)" title="Wishlist">🤍</button>
-            <button class="action-btn" title="Quick View">👁️</button>
-          </div>
-        </div>
-        <div class="product-info">
-          <div class="product-category">بدلة أولاد</div>
-          <div class="product-name">بدلة هاوار الكردية التقليدية للأولاد</div>
-          <div class="product-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-count">(143)</span>
-          </div>
-          <div class="product-colors">
-            <div class="color-dot" style="background:#1a6b4a;" title="أخضر"></div>
-            <div class="color-dot" style="background:#1a3a6b;" title="أزرق"></div>
-            <div class="color-dot" style="background:#6b1a1a;" title="أحمر غامق"></div>
-          </div>
-          <div class="product-footer">
-            <div class="product-price">
-              <span class="price-current">36,000 د.ع</span>
-              <span class="price-old">52,000 د.ع</span>
-            </div>
-            <button class="add-to-cart" onclick="addToCart('بدلة هاوار للأولاد', 36000, '👦', 'linear-gradient(145deg,#1a3a6b,#1a6b4a)')">
-              🛒 أضف
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 4d: Baby Embroidered Set -->
-      <div class="product-card children-card" data-category="children">
-        <div class="product-img-wrap">
-          <div class="product-img-placeholder" style="background: linear-gradient(145deg,#1a6b6b,#2ab8b8);">
-            <span>👶</span>
-          </div>
-          <span class="product-badge badge-new">جديد</span>
-          <div class="product-actions">
-            <button class="action-btn" onclick="toggleWishlist(this)" title="Wishlist">🤍</button>
-            <button class="action-btn" title="Quick View">👁️</button>
-          </div>
-        </div>
-        <div class="product-info">
-          <div class="product-category">ملابس رضع</div>
-          <div class="product-name">طقم بيري للرضع المطرز كردياً — فيروزي</div>
-          <div class="product-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-count">(67)</span>
-          </div>
-          <div class="product-colors">
-            <div class="color-dot" style="background:#2ab8b8;" title="فيروزي"></div>
-            <div class="color-dot" style="background:#e05a2b;" title="برتقالي"></div>
-            <div class="color-dot" style="background:#C0392B;" title="أحمر"></div>
-          </div>
-          <div class="product-footer">
-            <div class="product-price">
-              <span class="price-current">22,000 د.ع</span>
-              <span class="price-old">32,000 د.ع</span>
-            </div>
-            <button class="add-to-cart" onclick="addToCart('طقم بيري للرضع', 22000, '👶', 'linear-gradient(145deg,#1a6b6b,#2ab8b8)')">
-              🛒 أضف
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 4e: Wedding Kids Set -->
-      <div class="product-card children-card" data-category="children">
-        <div class="product-img-wrap">
-          <div class="product-img-placeholder" style="background: linear-gradient(145deg,#6b4a1a,#d4891a);">
-            <span>🎀</span>
-          </div>
-          <span class="product-badge badge-limited">محدود</span>
-          <div class="product-actions">
-            <button class="action-btn" onclick="toggleWishlist(this)" title="Wishlist">🤍</button>
-            <button class="action-btn" title="Quick View">👁️</button>
-          </div>
-        </div>
-        <div class="product-info">
-          <div class="product-category">طقم أفراح أطفال</div>
-          <div class="product-name">طقم زيان للأفراح والمناسبات — ذهبي فاخر</div>
-          <div class="product-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-count">(55)</span>
-          </div>
-          <div class="product-colors">
-            <div class="color-dot" style="background:#d4891a;" title="ذهبي"></div>
-            <div class="color-dot" style="background:#C0392B;" title="أحمر"></div>
-          </div>
-          <div class="product-footer">
-            <div class="product-price">
-              <span class="price-current">48,000 د.ع</span>
-              <span class="price-old">68,000 د.ع</span>
-            </div>
-            <button class="add-to-cart" onclick="addToCart('طقم زيان للأفراح', 48000, '🎀', 'linear-gradient(145deg,#6b4a1a,#d4891a)')">
-              🛒 أضف
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 4f: Teen Girl Dress -->
-      <div class="product-card children-card" data-category="children">
-        <div class="product-img-wrap">
-          <div class="product-img-placeholder" style="background: linear-gradient(145deg,#4a0a6b,#9b30d4);">
-            <span>🩷</span>
-          </div>
-          <div class="product-actions">
-            <button class="action-btn" onclick="toggleWishlist(this)" title="Wishlist">🤍</button>
-            <button class="action-btn" title="Quick View">👁️</button>
-          </div>
-        </div>
-        <div class="product-info">
-          <div class="product-category">فستان مراهقات</div>
-          <div class="product-name">فستان نيلوفر الكردي للمراهقات — بنفسجي</div>
-          <div class="product-rating">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-count">(82)</span>
-          </div>
-          <div class="product-colors">
-            <div class="color-dot" style="background:#9b30d4;" title="بنفسجي"></div>
-            <div class="color-dot" style="background:#C0392B;" title="أحمر"></div>
-            <div class="color-dot" style="background:#1a6b4a;" title="أخضر"></div>
-          </div>
-          <div class="product-footer">
-            <div class="product-price">
-              <span class="price-current">42,000 د.ع</span>
-              <span class="price-old">58,000 د.ع</span>
-            </div>
-            <button class="add-to-cart" onclick="addToCart('فستان نيلوفر للمراهقات', 42000, '🩷', 'linear-gradient(145deg,#4a0a6b,#9b30d4)')">
-              🛒 أضف
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 5 -->
-      <div class="product-card" data-category="bridal">
-        <div class="product-img-wrap">
-          <div class="product-img-placeholder" style="background: linear-gradient(145deg,#6b4a1a,#c07820);">
-            <span>👰</span>
-          </div>
-          <span class="product-badge badge-limited">Limited</span>
-          <div class="product-actions">
-            <button class="action-btn" onclick="toggleWishlist(this)" title="Wishlist">🤍</button>
-            <button class="action-btn" title="Quick View">👁️</button>
-          </div>
-        </div>
-        <div class="product-info">
-          <div class="product-category">Bridal Dress</div>
-          <div class="product-name">Zarîn Bridal Gown — Gold Embroidery</div>
-          <div class="product-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-count">(42)</span>
-          </div>
-          <div class="product-colors">
-            <div class="color-dot" style="background:#c07820;" title="Gold"></div>
-            <div class="color-dot" style="background:#C0392B;" title="Red"></div>
-          </div>
-          <div class="product-footer">
-            <div class="product-price">
-              <span class="price-current">118,000 د.ع</span>
-              <span class="price-old">183,000 د.ع</span>
-            </div>
-            <button class="add-to-cart" onclick="addToCart('Zarîn Bridal Gown', 118000, '👰', 'linear-gradient(145deg,#6b4a1a,#c07820)')">
-              🛒 Add
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 6 -->
-      <div class="product-card" data-category="accessories">
-        <div class="product-img-wrap">
-          <div class="product-img-placeholder" style="background: linear-gradient(145deg,#4a3000,#b8860b);">
-            <span>💎</span>
-          </div>
-          <span class="product-badge badge-new">New</span>
-          <div class="product-actions">
-            <button class="action-btn" onclick="toggleWishlist(this)" title="Wishlist">🤍</button>
-            <button class="action-btn" title="Quick View">👁️</button>
-          </div>
-        </div>
-        <div class="product-info">
-          <div class="product-category">Accessories</div>
-          <div class="product-name">Kurdistani Headdress Belt — Handwoven</div>
-          <div class="product-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-count">(78)</span>
-          </div>
-          <div class="product-colors">
-            <div class="color-dot" style="background:#b8860b;" title="Gold"></div>
-            <div class="color-dot" style="background:#C0392B;" title="Red"></div>
-            <div class="color-dot" style="background:#1a1a2e;" title="Black"></div>
-          </div>
-          <div class="product-footer">
-            <div class="product-price">
-              <span class="price-current">26,000 د.ع</span>
-              <span class="price-old">37,000 د.ع</span>
-            </div>
-            <button class="add-to-cart" onclick="addToCart('Kurdistani Headdress Belt', 26000, '💎', 'linear-gradient(145deg,#4a3000,#b8860b)')">
-              🛒 Add
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 7 -->
-      <div class="product-card" data-category="men">
-        <div class="product-img-wrap">
-          <div class="product-img-placeholder" style="background: linear-gradient(145deg,#1a3a0e,#2d5a1a);">
-            <span>🥻</span>
-          </div>
-          <span class="product-badge badge-sale">Sale</span>
-          <div class="product-actions">
-            <button class="action-btn" onclick="toggleWishlist(this)" title="Wishlist">🤍</button>
-            <button class="action-btn" title="Quick View">👁️</button>
-          </div>
-        </div>
-        <div class="product-info">
-          <div class="product-category">Men's Suit</div>
-          <div class="product-name">Hiwa Celebration Suit — Olive Green</div>
-          <div class="product-rating">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-count">(53)</span>
-          </div>
-          <div class="product-colors">
-            <div class="color-dot" style="background:#2d5a1a;" title="Olive"></div>
-            <div class="color-dot" style="background:#1a1a2e;" title="Black"></div>
-            <div class="color-dot" style="background:#1a2a6b;" title="Navy"></div>
-          </div>
-          <div class="product-footer">
-            <div class="product-price">
-              <span class="price-current">72,000 د.ع</span>
-              <span class="price-old">102,000 د.ع</span>
-            </div>
-            <button class="add-to-cart" onclick="addToCart('Hiwa Celebration Suit', 72000, '🥻', 'linear-gradient(145deg,#1a3a0e,#2d5a1a)')">
-              🛒 Add
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 8 -->
-      <div class="product-card" data-category="women">
-        <div class="product-img-wrap">
-          <div class="product-img-placeholder" style="background: linear-gradient(145deg,#5a0a3a,#9e1b6e);">
-            <span>🩱</span>
-          </div>
-          <span class="product-badge badge-hot">Hot</span>
-          <div class="product-actions">
-            <button class="action-btn" onclick="toggleWishlist(this)" title="Wishlist">🤍</button>
-            <button class="action-btn" title="Quick View">👁️</button>
-          </div>
-        </div>
-        <div class="product-info">
-          <div class="product-category">Women's Top</div>
-          <div class="product-name">Rewşen Velvet Top — Deep Magenta</div>
-          <div class="product-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-count">(176)</span>
-          </div>
-          <div class="product-colors">
-            <div class="color-dot" style="background:#9e1b6e;" title="Magenta"></div>
-            <div class="color-dot" style="background:#C0392B;" title="Red"></div>
-            <div class="color-dot" style="background:#1a4a99;" title="Navy"></div>
-          </div>
-          <div class="product-footer">
-            <div class="product-price">
-              <span class="price-current">43,000 د.ع</span>
-              <span class="price-old">63,000 د.ع</span>
-            </div>
-            <button class="add-to-cart" onclick="addToCart('Rewşen Velvet Top', 43000, '🩱', 'linear-gradient(145deg,#5a0a3a,#9e1b6e)')">
-              🛒 Add
-            </button>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /products-grid -->
-
-    <div class="load-more-wrap">
-      <button class="btn-load-more">View All Products →</button>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     PROMO BANNER (Countdown)
-     ============================================================ -->
-<section class="promo-banner">
-  <div class="container">
-    <div class="promo-content">
-      <div class="promo-info">
-        <div class="promo-label">⚡ Flash Sale — Ends Soon!</div>
-        <h2 class="promo-title">
-          Up to <span>40% Off</span><br/>
-          on Selected Items
-        </h2>
-        <p class="promo-desc">Don't miss out on our biggest seasonal sale — traditional Kurdish clothing at prices you won't believe.</p>
-        <a href="#products" class="promo-btn">Shop the Sale →</a>
-      </div>
-      <div class="promo-countdown">
-        <div class="countdown-item">
-          <span class="countdown-num" id="cd-hours">23</span>
-          <span class="countdown-label">Hours</span>
-        </div>
-        <div class="countdown-item">
-          <span class="countdown-num" id="cd-minutes">47</span>
-          <span class="countdown-label">Minutes</span>
-        </div>
-        <div class="countdown-item">
-          <span class="countdown-num" id="cd-seconds">12</span>
-          <span class="countdown-label">Seconds</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     TESTIMONIALS
-     ============================================================ -->
-<section class="testimonials" id="about">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">Customer Reviews</div>
-      <h2 class="section-title">What Our Customers Say</h2>
-      <p class="section-subtitle">Thousands of happy customers across the globe wearing our traditional Kurdish clothing with pride</p>
-    </div>
-
-    <div class="testimonials-grid">
-
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">
-          "The fabric quality is absolutely incredible. I bought a dress for Nowruz and everyone was asking where I got it. The colors are so vibrant and it arrived in perfect condition!"
-        </p>
-        <div class="testimonial-author">
-          <div class="author-avatar" style="background: linear-gradient(135deg,#C0392B,#e74c3c);">S</div>
-          <div>
-            <div class="author-name">Sara Mahmoud</div>
-            <div class="author-location">🇩🇪 Germany</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">
-          "Best price I've found for authentic Kurdish clothing anywhere online. The embroidery is so detailed and the material is breathable. Will definitely order again!"
-        </p>
-        <div class="testimonial-author">
-          <div class="author-avatar" style="background: linear-gradient(135deg,#2563eb,#1a4a99);">A</div>
-          <div>
-            <div class="author-name">Ahmad Khaled</div>
-            <div class="author-location">🇸🇪 Sweden</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">
-          "Ordered children's traditional outfit for a wedding — it was perfect! Shipped fast, beautiful packaging, and the kids looked amazing. Customer service was great too."
-        </p>
-        <div class="testimonial-author">
-          <div class="author-avatar" style="background: linear-gradient(135deg,#2d7a35,#1a4a1e);">L</div>
-          <div>
-            <div class="author-name">Lana Rashid</div>
-            <div class="author-location">🇬🇧 United Kingdom</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">
-          "I was skeptical about ordering online but the photos matched exactly what I received. The red Dilan dress is stunning. So worth it at this price!"
-        </p>
-        <div class="testimonial-author">
-          <div class="author-avatar" style="background: linear-gradient(135deg,#8B2DB8,#5a1a6b);">R</div>
-          <div>
-            <div class="author-name">Rêzan Omar</div>
-            <div class="author-location">🇳🇱 Netherlands</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">
-          "My mother is from Kurdistan and she was emotional when she saw the quality. 'Just like back home' she said. That's the highest compliment this store could get."
-        </p>
-        <div class="testimonial-author">
-          <div class="author-avatar" style="background: linear-gradient(135deg,#c07820,#6b4a1a);">H</div>
-          <div>
-            <div class="author-name">Heval Aziz</div>
-            <div class="author-location">🇺🇸 United States</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★☆</div>
-        <p class="testimonial-text">
-          "Great selection and prices! The only small thing is sizing runs a bit big, so order one size down. But the quality and design are fantastic — 10/10 would recommend."
-        </p>
-        <div class="testimonial-author">
-          <div class="author-avatar" style="background: linear-gradient(135deg,#9e1b6e,#5a0a3a);">N</div>
-          <div>
-            <div class="author-name">Nêrgiz Salih</div>
-            <div class="author-location">🇨🇦 Canada</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     NEWSLETTER
-     ============================================================ -->
-<section class="newsletter">
-  <div class="container">
-    <div class="newsletter-content">
+<!-- ░░░ FOOTER ░░░ -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-logo">KRDM<span>.</span></div>
+    <div class="footer-links-grid">
       <div>
-        <h2 class="newsletter-title">Stay in the Loop 📬</h2>
-        <p class="newsletter-desc">Get exclusive deals, new arrivals, and styling inspiration sent straight to your inbox. No spam, ever.</p>
+        <div class="footer-col-title">Shop</div>
+        <a href="#work">Women's</a>
+        <a href="#work">Men's</a>
+        <a href="#work">Children's</a>
+        <a href="#work">Bridal</a>
+        <a href="#work">Accessories</a>
       </div>
-      <form class="newsletter-form" id="newsletter-form">
-        <input class="newsletter-input" type="email" placeholder="Enter your email address..." required />
-        <button type="submit" class="newsletter-submit">Subscribe →</button>
-      </form>
+      <div>
+        <div class="footer-col-title">Help</div>
+        <a href="#">Size Guide</a>
+        <a href="#">Shipping Info</a>
+        <a href="#">Returns</a>
+        <a href="#">Track Order</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <a href="mailto:hello@krdmforsale.com">hello@krdmforsale.com</a>
+        <a href="tel:+9647501234567">+964 750 123 4567</a>
+        <a href="#">Erbil, Kurdistan Region</a>
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+      </div>
     </div>
   </div>
-</section>
-
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
-<footer id="contact">
-  <div class="container">
-    <div class="footer-grid">
-
-      <!-- Brand -->
-      <div class="footer-brand">
-        <a href="#" class="logo">
-          <div class="logo-icon">👗</div>
-          <div class="logo-text">
-            <div class="brand">Kurds For Sale</div>
-            <div class="tagline">Traditional Kurdish Fashion</div>
-          </div>
-        </a>
-        <p class="footer-desc">
-          Celebrating Kurdish heritage through authentic, handcrafted traditional clothing. We bring the colors and beauty of Kurdistan to the world.
-        </p>
-        <div class="social-links">
-          <a href="#" class="social-link" title="Facebook">📘</a>
-          <a href="#" class="social-link" title="Instagram">📸</a>
-          <a href="#" class="social-link" title="TikTok">🎵</a>
-          <a href="#" class="social-link" title="YouTube">▶️</a>
-          <a href="#" class="social-link" title="WhatsApp">💬</a>
-        </div>
-      </div>
-
-      <!-- Quick Links -->
-      <div>
-        <div class="footer-heading">Quick Links</div>
-        <ul class="footer-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#categories">Collections</a></li>
-          <li><a href="#products">Shop All</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-
-      <!-- Help -->
-      <div>
-        <div class="footer-heading">Customer Help</div>
-        <ul class="footer-links">
-          <li><a href="#">Size Guide</a></li>
-          <li><a href="#">Shipping Info</a></li>
-          <li><a href="#">Return Policy</a></li>
-          <li><a href="#">Order Tracking</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-        </ul>
-      </div>
-
-      <!-- Contact -->
-      <div>
-        <div class="footer-heading">Contact Us</div>
-        <div class="footer-contact">
-          <div class="contact-item">
-            <div class="contact-icon">📧</div>
-            <div class="contact-text">hello@kurdsforsale.com</div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon">📞</div>
-            <div class="contact-text">+964 750 123 4567</div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon">📍</div>
-            <div class="contact-text">Erbil, Kurdistan Region, Iraq</div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon">⏰</div>
-            <div class="contact-text">Mon–Sat: 9am – 8pm (GMT+3)</div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /footer-grid -->
-
-    <!-- Footer Bottom -->
-    <div class="footer-bottom">
-      <div class="footer-bottom-text">
-        © 2026 <a href="#">Kurds For Sale</a> — All rights reserved. Made with ❤️ for Kurdish culture.
-      </div>
-      <div class="payment-icons">
-        <span class="payment-icon">VISA</span>
-        <span class="payment-icon">MC</span>
-        <span class="payment-icon">PayPal</span>
-        <span class="payment-icon">Apple Pay</span>
-      </div>
+  <div class="footer-bottom">
+    <span>© 2026 KRDM For Sale. Made with pride in Kurdistan.</span>
+    <div class="footer-pay">
+      <span>VISA</span><span>MC</span><span>PayPal</span>
     </div>
   </div>
 </footer>
 
-<!-- ============================================================
-     CART SIDEBAR
-     ============================================================ -->
-<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
-
-<div class="cart-sidebar" id="cart-sidebar">
-  <div class="cart-header">
-    <h3>🛒 Your Cart</h3>
-    <button class="cart-close" onclick="closeCart()">✕</button>
+<!-- ░░░ CART DRAWER ░░░ -->
+<div class="cart-backdrop" id="cart-backdrop" onclick="closeCart()"></div>
+<aside class="cart-drawer" id="cart-drawer">
+  <div class="cart-head">
+    <h3>Cart <span id="cart-head-count">(0)</span></h3>
+    <button onclick="closeCart()">✕</button>
   </div>
-
-  <div class="cart-items" id="cart-items">
-    <!-- Cart items rendered by JS -->
-  </div>
-
-  <div class="cart-empty" id="cart-empty" style="display:flex;">
-    <div class="cart-empty-icon">🛒</div>
-    <p>Your cart is empty</p>
-    <button class="btn-primary" onclick="closeCart(); document.querySelector('#products').scrollIntoView({behavior:'smooth'})">
-      Start Shopping →
-    </button>
-  </div>
-
-  <div class="cart-footer">
-    <div class="cart-total">
-      <span class="cart-total-label">Total:</span>
-      <span class="cart-total-price" id="cart-total">0 د.ع</span>
+  <div class="cart-body" id="cart-body">
+    <div class="cart-empty-state" id="cart-empty-state">
+      <span>Your cart is empty</span>
+      <button onclick="closeCart();document.querySelector('#work').scrollIntoView({behavior:'smooth'})">Start shopping →</button>
     </div>
-    <button class="checkout-btn" onclick="checkout()">
-      Proceed to Checkout →
-    </button>
   </div>
-</div>
+  <div class="cart-foot" id="cart-foot">
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span id="cart-total-price">0 د.ع</span>
+    </div>
+    <button class="btn-checkout" onclick="checkout()">Checkout →</button>
+  </div>
+</aside>
 
-<!-- ============================================================
-     BACK TO TOP
-     ============================================================ -->
-<button class="back-to-top" id="back-to-top" title="Back to top">↑</button>
+<!-- ░░░ TOAST ░░░ -->
+<div class="toast" id="toast"></div>
 
-<!-- ============================================================
-     TOAST NOTIFICATION
-     ============================================================ -->
-<div class="toast" id="toast">
-  <span class="toast-icon">✅</span>
-  <span class="toast-msg">Item added to cart!</span>
-</div>
-
-<!-- ============================================================
-     SCRIPTS
-     ============================================================ -->
 <script src="js/main.js"></script>
-<script>
-  // Category quick-filter via hero category cards
-  function filterProductsByCategory(cat) {
-    document.querySelector('#products').scrollIntoView({ behavior: 'smooth' });
-    setTimeout(() => {
-      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.product-card').forEach(card => {
-        if (cat === 'all' || card.dataset.category === cat) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-      // find the matching filter btn
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        if (btn.textContent.toLowerCase().includes(cat)) btn.classList.add('active');
-      });
-    }, 600);
-  }
-</script>
-
 </body>
 </html>
