@@ -3,722 +3,669 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BAGHDADIA (بغدادية) — Traditional Iraqi Bakery & Sweets</title>
-  
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23f59e0b'>🌾</text></svg>"/>
-  
-  <!-- Google Fonts: Outfit (Sans), Playfair Display (Serif), Cairo (Arabic) -->
+  <title>BAGHDADIA — Traditional Iraqi Bakery & Sweets</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23ffaa00'>B</text></svg>"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet"/>
-  
-  <!-- Stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Cairo:wght@600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
-  <!-- ============================================================
-       CUSTOM CURSOR (Amber Glow Dot + Lag Ring)
-       ============================================================ -->
-  <div class="cursor-dot" id="cursor-dot"></div>
-  <div class="cursor-ring" id="cursor-ring"></div>
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursor-follower"></div>
 
-  <!-- ============================================================
-       FULLSCREEN PRELOADER
-       ============================================================ -->
-  <div class="loader-screen" id="loader-screen">
-    <div class="loader-brand">BAGHDADIA<span>.</span></div>
-    <div class="loader-sub">المخبز البغدادي الأصيل ✦ منذ ١٩٥٤</div>
-    <div class="loader-progress-wrap">
-      <div class="loader-progress-bar" id="loader-progress-bar"></div>
-    </div>
-    <div class="loader-percentage" id="loader-percentage">0%</div>
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <div class="loader-logo">BAGHDADIA<span>.</span></div>
+    <div class="loader-bar"><div class="loader-fill" id="loader-fill"></div></div>
+    <div class="loader-text" id="loader-text">TRADITIONAL IRAQI BAKERY</div>
   </div>
+</div>
 
-  <!-- ============================================================
-       STICKY MINIMAL NAVIGATION
-       ============================================================ */ -->
-  <header class="nav-header" id="nav-header">
-    <div class="nav-left">
-      <a href="#hero" class="nav-logo">BAGHDADIA<span>.</span></a>
-      <span class="nav-arabic-mark">مخبوزات وحلويات بغداد</span>
-    </div>
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#hero" class="nav-logo">
+    BAGHDADIA<span>.</span>
+    <span class="nav-arabic-pill">مخبز بغدادي</span>
+  </a>
+  <div class="nav-links">
+    <a href="#collections" class="nav-link">Collections</a>
+    <a href="#products" class="nav-link">Products</a>
+    <a href="#story" class="nav-link">Story</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <button class="nav-cart" id="nav-cart-btn" onclick="openCart()">
+      Cart <span class="cart-count" id="cart-count">0</span>
+    </button>
+    <button class="nav-burger" id="nav-burger" onclick="toggleMobileMenu()">
+      <span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-    <nav class="nav-center">
-      <a href="#products" class="nav-menu-link">Artisanal Bakes</a>
-      <a href="#craft" class="nav-menu-link">Stone Hearth</a>
-      <a href="#heritage" class="nav-menu-link">Generations</a>
-      <a href="#collab" class="nav-menu-link">Bespoke Catering</a>
-      <a href="#contact" class="nav-menu-link">Hearth Locations</a>
-    </nav>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#collections" onclick="closeMobileMenu()">Collections</a>
+  <a href="#products" onclick="closeMobileMenu()">Products</a>
+  <a href="#story" onclick="closeMobileMenu()">Story</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+</div>
 
-    <div class="nav-right">
-      <button class="nav-audio-btn" id="audio-toggle-btn" onclick="toggleAudio()" title="Sound: Enabled">
-        🔊
-      </button>
-
-      <button class="nav-pill-btn" onclick="openCartDrawer()">
-        Order Bag <span class="nav-cart-badge" id="nav-cart-badge">0</span>
-      </button>
-
-      <button class="nav-burger-btn" id="nav-burger-btn" onclick="toggleMobileNav()" aria-label="Toggle Menu">
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </header>
-
-  <!-- ============================================================
-       MOBILE FULLSCREEN MENU
-       ============================================================ -->
-  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
-    <div class="mobile-nav-links">
-      <a href="#hero" class="mobile-nav-item" onclick="closeMobileNav()"><span>01</span>Home</a>
-      <a href="#products" class="mobile-nav-item" onclick="closeMobileNav()"><span>02</span>Menu & Sweets</a>
-      <a href="#craft" class="mobile-nav-item" onclick="closeMobileNav()"><span>03</span>Stone Hearth</a>
-      <a href="#heritage" class="mobile-nav-item" onclick="closeMobileNav()"><span>04</span>Generations</a>
-      <a href="#collab" class="mobile-nav-item" onclick="closeMobileNav()"><span>05</span>Catering Inquiry</a>
-    </div>
-    <div class="mobile-nav-footer">
-      <span>Al-Karrada Al-Sharqiya, Baghdad, Iraq</span>
-      <span>+964 770 123 4567 • info@baghdadia.iq</span>
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg-text" aria-hidden="true">BAGHDAD</div>
+  
+  <div class="container hero-content">
+    <p class="hero-eyebrow">— TRADITIONAL HERITAGE — BAKED FRESH DAILY 2026</p>
+    <h1 class="hero-title">
+      Taste the<br/>
+      Flavors of<br/>
+      <span>Baghdad.</span>
+    </h1>
+    
+    <div class="hero-bottom-grid">
+      <p class="hero-desc">
+        Authentic handcrafted traditional Iraqi bakes and sweets — rich sheep ghee (دهن حر), stone-hearth ovens, and timeless recipes baked fresh daily.
+      </p>
+      <a href="#products" class="hero-btn">SHOP NOW →</a>
     </div>
   </div>
 
-  <!-- ============================================================
-       PINNED HERO SECTION (Qream Signature 3D Perspective + Pin)
-       ============================================================ -->
-  <div class="hero-pin-wrapper" id="hero">
-    <div class="hero-pinned">
-      <div class="hero-perspective-box" id="hero-perspective-box">
-        
-        <!-- Ambient Radial Glow -->
-        <div class="hero-ambient-glow"></div>
-
-        <!-- Giant Background Watermark Text -->
-        <div class="hero-ghost-word" aria-hidden="true">BAGHDAD</div>
-
-        <!-- Rotating Circular Stamp Seal (Qream Style) -->
-        <div class="hero-circular-stamp">
-          <svg viewBox="0 0 200 200" class="stamp-svg">
-            <defs>
-              <path id="stamp-path" d="M 100,100 m -75,0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"/>
-            </defs>
-            <text>
-              <textPath href="#stamp-path" startOffset="0%">
-                ✦ TRADITIONAL IRAQI BAKERY ✦ BAGHDAD ✦ SINCE 1954 ✦ PURE SHEEP GHEE ✦
-              </textPath>
-            </text>
-          </svg>
-          <div class="stamp-center-icon">🌾</div>
-        </div>
-
-        <!-- Hero Top Meta -->
-        <div class="hero-top-meta">
-          <div class="hero-pill-tag">
-            <span class="hero-pill-dot"></span>
-            Stone Hearth & Pure Sheep Ghee (دهن حر)
-          </div>
-          <div class="hero-top-coords">
-            33.3152° N, 44.3661° E — MESOPOTAMIA
-          </div>
-        </div>
-
-        <!-- Hero Main Title (Bold Sans + Serif Italic Alternating Lines) -->
-        <div class="hero-title-container">
-          <h1 class="hero-main-title">
-            <div class="hero-line"><span>DEFYING</span></div>
-            <div class="hero-line serif-italic"><span>THE ORDINARY</span></div>
-            <div class="hero-line"><span>FOR MESOPOTAMIAN</span></div>
-            <div class="hero-line serif-italic"><span>SWEETS & BAKES<span class="dot">.</span></span></div>
-          </h1>
-        </div>
-
-        <!-- Hero Bottom Row: Stats & Scroll Down -->
-        <div class="hero-bottom-row">
-          <div class="hero-stats-group">
-            <div class="hero-stat-item">
-              <span class="stat-number">1954<sup>EST</sup></span>
-              <span class="stat-label">Baghdad Founding</span>
-            </div>
-            <div class="hero-stat-item">
-              <span class="stat-number">100<sup>%</sup></span>
-              <span class="stat-label">Pure Dihin Hor Ghee</span>
-            </div>
-            <div class="hero-stat-item">
-              <span class="stat-number">45K<sup>+</sup></span>
-              <span class="stat-label">Monthly Bakes</span>
-            </div>
-            <div class="hero-stat-item">
-              <span class="stat-number">14<sup>+</sup></span>
-              <span class="stat-label">Master Recipes</span>
-            </div>
-          </div>
-
-          <div class="hero-scroll-indicator">
-            <span>Explore Hearth</span>
-            <div class="scroll-arrow-circle">↓</div>
-          </div>
-        </div>
-
+  <div class="container hero-stats-row">
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-val">500<sup>+</sup></span>
+        <span class="hero-stat-key">Products</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-val">10K<sup>+</sup></span>
+        <span class="hero-stat-key">Customers</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-val">100<sup>%</sup></span>
+        <span class="hero-stat-key">Pure Ghee</span>
       </div>
     </div>
+    <div class="hero-scroll">SCROLL ↓</div>
   </div>
+</section>
 
-  <!-- ============================================================
-       SCROLL CONTENT (Slides Up Over the Pinned Hero)
-       ============================================================ -->
-  <div class="scroll-content-wrapper">
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <div class="marquee-item">BAGHDADI DATE KLEICHA <span>✦</span> NAJAFI DAHEEN <span>✦</span> HEARTH SAMOON <span>✦</span> ZENOUD EL SIT <span>✦</span> KAHI & GEYMAR <span>✦</span> PISTACHIO BAQLAWA <span>✦</span> CLAY TANNOUR <span>✦</span> GOLDEN ZALABIA <span>✦</span></div>
+    <div class="marquee-item">BAGHDADI DATE KLEICHA <span>✦</span> NAJAFI DAHEEN <span>✦</span> HEARTH SAMOON <span>✦</span> ZENOUD EL SIT <span>✦</span> KAHI & GEYMAR <span>✦</span> PISTACHIO BAQLAWA <span>✦</span> CLAY TANNOUR <span>✦</span> GOLDEN ZALABIA <span>✦</span></div>
+  </div>
+</div>
 
-    <!-- CONTINUOUS MARQUEE RIBBON -->
-    <div class="marquee-ribbon">
-      <div class="marquee-track">
-        <span class="marquee-item">BAGHDADI DATE KLEICHA <span class="marquee-sep">✦</span> كليجة بالتمر</span>
-        <span class="marquee-item">DAHEEN NAJAFI AL-MALAKI <span class="marquee-sep">✦</span> دهين نجفي</span>
-        <span class="marquee-item">STONE-BAKED SAMOON HIJRI <span class="marquee-sep">✦</span> صمون حجري</span>
-        <span class="marquee-item">ZENOUD EL SIT PASTRIES <span class="marquee-sep">✦</span> زنود الست</span>
-        <span class="marquee-item">KAHI & GEYMAR ARAB <span class="marquee-sep">✦</span> كاهي وقيمر</span>
-        <span class="marquee-item">ROYAL PISTACHIO BAQLAWA <span class="marquee-sep">✦</span> بقلاوة بالفستق</span>
-        <span class="marquee-item">KHUBZ TANNOUR BIL SIMSIM <span class="marquee-sep">✦</span> خبز تنور</span>
-        <span class="marquee-item">CRISPY GOLDEN ZALABIA <span class="marquee-sep">✦</span> زلابية مقرمشة</span>
-        <!-- Duplicated track for seamless loop -->
-        <span class="marquee-item">BAGHDADI DATE KLEICHA <span class="marquee-sep">✦</span> كليجة بالتمر</span>
-        <span class="marquee-item">DAHEEN NAJAFI AL-MALAKI <span class="marquee-sep">✦</span> دهين نجفي</span>
-        <span class="marquee-item">STONE-BAKED SAMOON HIJRI <span class="marquee-sep">✦</span> صمون حجري</span>
-        <span class="marquee-item">ZENOUD EL SIT PASTRIES <span class="marquee-sep">✦</span> زنود الست</span>
-        <span class="marquee-item">KAHI & GEYMAR ARAB <span class="marquee-sep">✦</span> كاهي وقيمر</span>
-        <span class="marquee-item">ROYAL PISTACHIO BAQLAWA <span class="marquee-sep">✦</span> بقلاوة بالفستق</span>
-        <span class="marquee-item">KHUBZ TANNOUR BIL SIMSIM <span class="marquee-sep">✦</span> خبز تنور</span>
-        <span class="marquee-item">CRISPY GOLDEN ZALABIA <span class="marquee-sep">✦</span> زلابية مقرمشة</span>
-      </div>
-    </div>
-
-    <!-- SECTION 01: CRAFT & PILLARS (Qream 01 02 03 04) -->
-    <section class="pillars-section" id="craft">
-      <div class="container">
-        <p class="section-eyebrow">Master Hearth Craftsmanship</p>
-        <h2 class="section-main-heading">
-          Defying commercial shortcuts with <em>stone hearths, pure ghee,</em> and generational time.
-        </h2>
-
-        <div class="pillars-grid">
-          
-          <div class="pillar-row">
-            <span class="pillar-number">01</span>
-            <div class="pillar-content">
-              <h3>Stone Tannour & Hearth Breads <span class="arabic">صمون حجري وخبز تنور</span></h3>
-              <p>Hand-kneaded wild sourdough slapped against 450°C refractory stone and burning clay tannour walls. Blistered, airy, and crackling with authentic hearth smoke.</p>
-            </div>
-            <a href="#products" class="pillar-arrow">→</a>
-          </div>
-
-          <div class="pillar-row">
-            <span class="pillar-number">02</span>
-            <div class="pillar-content">
-              <h3>Heritage Kleicha & Date Biscuits <span class="arabic">كليجة الأعياد بالتمر والجوز</span></h3>
-              <p>The national treasure of Iraq. Hand-crimped pastries stuffed with caramelized Karbala Zahdi dates, mountain walnuts, cardamom, and pure sheep ghee (دهن حر).</p>
-            </div>
-            <a href="#products" class="pillar-arrow">→</a>
-          </div>
-
-          <div class="pillar-row">
-            <span class="pillar-number">03</span>
-            <div class="pillar-content">
-              <h3>Royal Confectionery & Daheen <span class="arabic">دهين نجفي وحلويات الملوك</span></h3>
-              <p>Slow-simmered Daheen Najafi drenched in date molasses and roasted coconut, crisp Zenood El Sit rolls bursting with buffalo ashta, and forty-layer pistachio Baqlawa.</p>
-            </div>
-            <a href="#products" class="pillar-arrow">→</a>
-          </div>
-
-          <div class="pillar-row">
-            <span class="pillar-number">04</span>
-            <div class="pillar-content">
-              <h3>Bespoke Diyafa & Festive Gifting <span class="arabic">صواني الضيافة والمناسبات</span></h3>
-              <p>Engraved brass keepsake chests and custom hospitality assortments tailored for Iraqi weddings, Eid celebrations, official state receptions, and family gatherings.</p>
-            </div>
-            <a href="#collab" class="pillar-arrow">→</a>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 02: PRODUCTS & BAKES SHOWCASE (Qream Project Grid) -->
-    <section class="products-section" id="products">
-      <div class="container">
-        
-        <div class="products-filter-header">
-          <div>
-            <p class="section-eyebrow">Artisanal Bakery & Confectionery</p>
-            <h2 class="section-main-heading">Bakes we're <em>proud of.</em></h2>
-          </div>
-
-          <!-- Category filter buttons with item counts -->
-          <div class="filter-row">
-            <button class="filter-pill-btn active" data-filter="all">All Bakes <sup>14</sup></button>
-            <button class="filter-pill-btn" data-filter="kleicha">Kleicha & Biscuits <sup>4</sup></button>
-            <button class="filter-pill-btn" data-filter="sweets">Royal Sweets <sup>6</sup></button>
-            <button class="filter-pill-btn" data-filter="tannour">Stone Tannour <sup>2</sup></button>
-            <button class="filter-pill-btn" data-filter="breakfast">Kahi & Gift Boxes <sup>2</sup></button>
-          </div>
-        </div>
-
-        <!-- 2px Gap Micro-Grid (Injected by JS) -->
-        <div class="products-grid" id="products-grid">
-          <!-- Dynamically populated by js/main.js -->
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION 03: HERITAGE STORY & GENERATIONAL CREDENTIALS -->
-    <section class="story-section" id="heritage">
-      <div class="container">
-        <div class="story-grid">
-          
-          <div class="story-left">
-            <p class="section-eyebrow">Generational Heritage</p>
-            <h2 class="story-heading">
-              Born in<br/>
-              <em>Baghdad.</em><br/>
-              Crafted for<br/>
-              royalty.
-            </h2>
-          </div>
-
-          <div class="story-right">
-            <div class="story-body-text">
-              <p class="lead">
-                Since 1954 along the historic banks of the Tigris in Al-Karrada, Baghdadia has guarded the sacred formulas of Mesopotamian pastry-making.
-              </p>
-              <p>
-                While industrial patisseries turned to hydrogenated vegetable shortening and artificial flavorings, our hearths remain steadfast. We use only 100% clarified sheep ghee (دهن حر) from northern pastures, hand-pitted Zahdi dates from Karbala orchards, green cardamom pods crushed fresh at dawn, and water-buffalo ashta sourced daily.
-              </p>
-              <p>
-                Every tray of Daheen, every diamond of Samoon, and every golden crescent of Kleicha carries the fragrance of a seventy-year tradition of Iraqi hospitality (كرم الضيافة البغدادي).
-              </p>
-            </div>
-
-            <div class="story-credentials-grid">
-              <div class="cred-card">
-                <strong>4x</strong>
-                <span>Baghdad Golden Tannour</span>
-              </div>
-              <div class="cred-card">
-                <strong>100%</strong>
-                <span>Clarified Sheep Ghee</span>
-              </div>
-              <div class="cred-card">
-                <strong>72 Yrs</strong>
-                <span>Continuous Heritage</span>
-              </div>
-              <div class="cred-card">
-                <strong>5.0 ★</strong>
-                <span>1,400+ Local Reviews</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 04: THE 5 VALUE PILLARS (Qream Numbered Accordion/List) -->
-    <section class="excellence-section">
-      <div class="container">
-        <p class="section-eyebrow">Our Unbroken Rules</p>
-        <h2 class="section-main-heading">
-          Five pillars of <em>uncompromising quality.</em>
-        </h2>
-
-        <div class="excellence-list">
-          
-          <div class="excellence-item">
-            <div class="excellence-title">Pure Iraqi Dihin Hor</div>
-            <div class="excellence-desc">Zero margarine, palm oils, or hydrogenated substitutes. Only grass-fed clarified sheep butter for incomparable aroma.</div>
-            <div class="excellence-num">01</div>
-          </div>
-
-          <div class="excellence-item">
-            <div class="excellence-title">450°C Refractory Ovens</div>
-            <div class="excellence-desc">Stone hearths and clay tannour walls that impart authentic blistered crackle and wood-fired character to every loaf.</div>
-            <div class="excellence-num">02</div>
-          </div>
-
-          <div class="excellence-item">
-            <div class="excellence-title">Karbala Zahdi Dates</div>
-            <div class="excellence-desc">Single-origin dates slow-simmered with cardamom seeds and toasted sesame, retaining deep caramel undertones.</div>
-            <div class="excellence-num">03</div>
-          </div>
-
-          <div class="excellence-item">
-            <div class="excellence-title">Twice-Daily Fresh Batches</div>
-            <div class="excellence-desc">Baking shifts at 6:00 AM and 4:00 PM. No day-old pastries or chilled shelf inventory. Fresh from the flame.</div>
-            <div class="excellence-num">04</div>
-          </div>
-
-          <div class="excellence-item">
-            <div class="excellence-title">Royal Diyafa Packaging</div>
-            <div class="excellence-desc">Heavy-gauge embossed brass and gold-foil presentation tins designed to dignify wedding banquets and state gifts.</div>
-            <div class="excellence-num">05</div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- CUSTOMER REVIEWS CONTINUOUS MARQUEE -->
-    <div class="reviews-section">
-      <div class="reviews-marquee-track">
-        
-        <div class="rcard-bubble">
-          <div class="rcard-stars">★★★★★</div>
-          <p class="rcard-quote">"My grandmother closed her eyes and took one bite of the Kleicha—she said it tasted exactly like 1960s Karrada. Pure magic."</p>
-          <span class="rcard-author">Dr. Mustafa Al-Rawi — Baghdad</span>
-        </div>
-
-        <div class="rcard-bubble">
-          <div class="rcard-stars">★★★★★</div>
-          <p class="rcard-quote">"The Daheen Najafi arrived warm in Erbil with the ghee still glistening. Unmatched quality, rich coconut, and real sheep butter."</p>
-          <span class="rcard-author">Rebin K. — Dream City, Erbil</span>
-        </div>
-
-        <div class="rcard-bubble">
-          <div class="rcard-stars">★★★★★</div>
-          <p class="rcard-quote">"Ordered 25 Royal Gift Tins for our Eid corporate delegation. The brass presentation and taste blew everyone away."</p>
-          <span class="rcard-author">Zahra Al-Husseini — Basra</span>
-        </div>
-
-        <div class="rcard-bubble">
-          <div class="rcard-stars">★★★★★</div>
-          <p class="rcard-quote">"The Kahi and Geymar on Friday morning is non-negotiable in our house. Flakiest pastry in Iraq by far."</p>
-          <span class="rcard-author">Ahmed Al-Jubouri — Al-Mansour</span>
-        </div>
-
-        <div class="rcard-bubble">
-          <div class="rcard-stars">★★★★★</div>
-          <p class="rcard-quote">"Stone-baked Samoon that shatters like glass when bitten, yet stays so soft inside. You can't fake this level of craft."</p>
-          <span class="rcard-author">Noor T. — Karbala</span>
-        </div>
-
-        <!-- Duplicated for seamless loop -->
-        <div class="rcard-bubble">
-          <div class="rcard-stars">★★★★★</div>
-          <p class="rcard-quote">"My grandmother closed her eyes and took one bite of the Kleicha—she said it tasted exactly like 1960s Karrada. Pure magic."</p>
-          <span class="rcard-author">Dr. Mustafa Al-Rawi — Baghdad</span>
-        </div>
-
-        <div class="rcard-bubble">
-          <div class="rcard-stars">★★★★★</div>
-          <p class="rcard-quote">"The Daheen Najafi arrived warm in Erbil with the ghee still glistening. Unmatched quality, rich coconut, and real sheep butter."</p>
-          <span class="rcard-author">Rebin K. — Dream City, Erbil</span>
-        </div>
-
-        <div class="rcard-bubble">
-          <div class="rcard-stars">★★★★★</div>
-          <p class="rcard-quote">"Ordered 25 Royal Gift Tins for our Eid corporate delegation. The brass presentation and taste blew everyone away."</p>
-          <span class="rcard-author">Zahra Al-Husseini — Basra</span>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- SECTION 05: INTERACTIVE CATERING / COLLAB FORM (Qream Style) -->
-    <section class="collab-section" id="collab">
-      <div class="container">
-        <div class="collab-container">
-          
-          <div class="collab-left">
-            <p class="section-eyebrow">Bespoke Orders & Catering</p>
-            <h2>LET'S CREATE <span>SOMETHING SWEET.</span></h2>
-            <p>
-              Planning an Iraqi wedding banquet, Ramadan gathering, or VIP state reception? Our master bakers craft bespoke dessert tables, warm daheen stations, and engraved gift boxes.
-            </p>
-            <div class="collab-direct-contact">
-              <span>Direct Concierge:</span>
-              <a href="tel:+9647701234567">📞 +964 770 123 4567</a>
-              <a href="https://wa.me/9647701234567" target="_blank" rel="noopener">💬 WhatsApp Master Baker</a>
-              <a href="mailto:catering@baghdadia.iq">✉️ catering@baghdadia.iq</a>
-            </div>
-          </div>
-
-          <div class="collab-form-box">
-            <form id="collab-form" onsubmit="handleCollabSubmit(event)">
-              
-              <div class="form-field-group">
-                <label>Occasion / Event Type</label>
-                <div class="pill-selector-row">
-                  <button type="button" class="choice-pill-btn selected" data-occasion="eid">Eid Celebration</button>
-                  <button type="button" class="choice-pill-btn" data-occasion="wedding">Wedding & Dawra</button>
-                  <button type="button" class="choice-pill-btn" data-occasion="gift">VIP Gift Chests</button>
-                  <button type="button" class="choice-pill-btn" data-occasion="corporate">Corporate Diyafa</button>
-                </div>
-              </div>
-
-              <div class="form-field-group">
-                <label>Estimated Budget (IQD)</label>
-                <div class="pill-selector-row">
-                  <button type="button" class="choice-pill-btn selected" data-budget="35-75">35,000 — 75,000 د.ع</button>
-                  <button type="button" class="choice-pill-btn" data-budget="75-200">75,000 — 200,000 د.ع</button>
-                  <button type="button" class="choice-pill-btn" data-budget="250+">250,000+ د.ع</button>
-                </div>
-              </div>
-
-              <div class="form-field-group">
-                <label>Your Name</label>
-                <input type="text" class="collab-input" placeholder="e.g. Ali Al-Baghdadi" required/>
-              </div>
-
-              <div class="form-field-group">
-                <label>Phone / WhatsApp Number (+964)</label>
-                <input type="tel" class="collab-input" placeholder="+964 770 000 0000" required/>
-              </div>
-
-              <div class="form-field-group">
-                <label>Delivery City & Date</label>
-                <input type="text" class="collab-input" placeholder="e.g. Baghdad (Al-Mansour) — Next Thursday" required/>
-              </div>
-
-              <div class="form-field-group">
-                <label>Custom Requests or Quantities</label>
-                <textarea class="collab-input" rows="3" placeholder="Tell us about special pastry selections, dietary requests, or presentation style..."></textarea>
-              </div>
-
-              <button type="submit" class="collab-submit-btn">
-                Request Catering Proposal →
-              </button>
-
-            </form>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 06: MASSIVE EDITORIAL FOOTER -->
-    <footer class="footer-main" id="contact">
-      <div class="container">
-        
-        <div class="footer-top-grid">
-          
-          <div class="footer-brand-col">
-            <a href="#hero" class="f-logo">BAGHDADIA<span>.</span></a>
-            <p class="f-tagline">
-              Artisanal Mesopotamian bakes, stone-hearth breads, and royal confectionery crafted since 1954.
-            </p>
-            <div class="footer-pay-badges">
-              <span class="pay-badge">Cash on Delivery</span>
-              <span class="pay-badge">ZainCash</span>
-              <span class="pay-badge">Qi Card</span>
-              <span class="pay-badge">Visa</span>
-            </div>
-          </div>
-
-          <div class="footer-col">
-            <h5>Traditional Menu</h5>
-            <ul>
-              <li><a href="#products">Baghdadi Kleicha</a></li>
-              <li><a href="#products">Daheen Najafi</a></li>
-              <li><a href="#products">Zenood El Sit</a></li>
-              <li><a href="#products">Kahi & Geymar Arab</a></li>
-              <li><a href="#products">Stone-Hearth Samoon</a></li>
-              <li><a href="#products">Pistachio Baqlawa</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
-            <h5>Hearth Locations</h5>
-            <ul>
-              <li><a href="#">Karrada Al-Sharqiya, Baghdad</a></li>
-              <li><a href="#">Al-Mutanabbi Street, Baghdad</a></li>
-              <li><a href="#">Dream City Mall, Erbil</a></li>
-              <li><a href="#">Corniche Street, Basra</a></li>
-              <li><a href="#">Old Grand Bazaar, Najaf</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
-            <h5>Hours & Service</h5>
-            <ul>
-              <li><a href="#">Daily: 6:00 AM — 11:30 PM</a></li>
-              <li><a href="#">Morning Batch: 6:00 AM</a></li>
-              <li><a href="#">Evening Batch: 4:00 PM</a></li>
-              <li><a href="tel:+9647701234567">+964 770 123 4567</a></li>
-              <li><a href="mailto:hello@baghdadia.iq">hello@baghdadia.iq</a></li>
-            </ul>
-          </div>
-
-        </div>
-
-        <!-- Giant Typography Wordmark (Qream Signature) -->
-        <div class="footer-giant-wordmark">
-          <div class="giant-text">BAGHDADIA</div>
-        </div>
-
-        <!-- Bottom Bar -->
-        <div class="footer-bottom-bar">
-          <span>© 2026 BAGHDADIA Artisanal Bakery. Handcrafted with pride in Baghdad & Erbil, Iraq.</span>
-          <span>Designed with high-fashion Mesopotamian aesthetic.</span>
-        </div>
-
-      </div>
-    </footer>
-
-  </div><!-- /scroll-content-wrapper -->
-
-
-  <!-- ============================================================
-       PRODUCT DETAIL QUICK VIEW MODAL
-       ============================================================ -->
-  <div class="modal-backdrop" id="product-modal-backdrop" onclick="if(event.target===this) closeProductModal()">
-    <div class="product-modal-card">
-      <button class="modal-close-trigger" onclick="closeProductModal()" aria-label="Close">✕</button>
+<!-- WHAT WE OFFER -->
+<section class="section" id="collections">
+  <div class="container">
+    <p class="section-eyebrow">— WHAT WE OFFER</p>
+    
+    <div class="services-grid">
       
-      <div class="modal-image-col">
-        <img id="modal-img" src="" alt="Product"/>
-      </div>
-
-      <div class="modal-details-col">
+      <div class="service-card">
+        <div class="service-card-num">01</div>
         <div>
-          <div class="modal-tag-row">
-            <span class="modal-cat-tag" id="modal-category">Category</span>
-            <span class="pcard-tag-badge" id="modal-badge">Badge</span>
-          </div>
+          <h3 class="service-card-title">Stone-Hearth Breads</h3>
+          <p class="service-card-desc">Traditional diamond Samoon Hijri and clay-oven sesame flatbreads baked fresh at 450°C.</p>
+        </div>
+        <a href="#products" class="service-card-link">BROWSE →</a>
+      </div>
 
-          <div class="modal-title-wrap" style="margin-top: 10px;">
-            <h3 id="modal-title">Product Name</h3>
-            <div class="modal-arabic" id="modal-arabic">الاسم العربي</div>
-          </div>
+      <div class="service-card">
+        <div class="service-card-num">02</div>
+        <div>
+          <h3 class="service-card-title">Heritage Kleicha</h3>
+          <p class="service-card-desc">Authentic date and walnut pastries infused with cardamom, toasted sesame, and pure sheep ghee.</p>
+        </div>
+        <a href="#products" class="service-card-link">BROWSE →</a>
+      </div>
 
-          <div class="modal-price-box" style="margin-top: 14px;">
-            <span class="m-now" id="modal-price-now">0 د.ع</span>
-            <span class="m-was" id="modal-price-was">0 د.ع</span>
-          </div>
+      <div class="service-card">
+        <div class="service-card-num">03</div>
+        <div>
+          <h3 class="service-card-title">Royal Confectionery</h3>
+          <p class="service-card-desc">Molten Daheen Najafi drenched in date syrup, crispy Zenood El Sit, and flaky pistachio Baqlawa.</p>
+        </div>
+        <a href="#products" class="service-card-link">BROWSE →</a>
+      </div>
 
-          <p class="modal-desc-full" id="modal-desc" style="margin-top: 16px;"></p>
+      <div class="service-card">
+        <div class="service-card-num">04</div>
+        <div>
+          <h3 class="service-card-title">Festive Gift Boxes</h3>
+          <p class="service-card-desc">Luxury engraved presentation tins and hospitality assortments for Eid, weddings, and gatherings.</p>
+        </div>
+        <a href="#products" class="service-card-link">BROWSE →</a>
+      </div>
 
-          <div class="modal-ingredients-badge" style="margin-top: 16px;">
-            <strong>Heritage Ingredients:</strong>
-            <span id="modal-ingredients"></span>
-          </div>
+    </div>
+  </div>
+</section>
 
-          <div class="modal-ingredients-badge" style="margin-top: 10px;">
-            <strong>Serving Recommendation:</strong>
-            <span id="modal-serving"></span>
-          </div>
+<!-- FEATURED PRODUCTS -->
+<section class="section" id="products" style="padding-top: 0;">
+  <div class="container">
+    
+    <div class="products-header">
+      <p class="section-eyebrow" style="margin-bottom: 0;">— FEATURED PRODUCTS</p>
+      
+      <div class="filter-row">
+        <button class="filter-pill active" data-filter="all">All</button>
+        <button class="filter-pill" data-filter="kleicha">Kleicha</button>
+        <button class="filter-pill" data-filter="sweets">Royal Sweets</button>
+        <button class="filter-pill" data-filter="breads">Hearth Breads</button>
+        <button class="filter-pill" data-filter="breakfast">Kahi & Sets</button>
+      </div>
+    </div>
 
-          <div style="font-size: 0.8rem; color: var(--cream-dim); margin-top: 10px;">
-            <strong>Pack Size:</strong> <span id="modal-weight"></span>
+    <div class="products-grid" id="products-grid">
+
+      <!-- 1. Date Kleicha -->
+      <article class="pcard" data-category="kleicha">
+        <div class="pcard-thumb">
+          <img src="images/kleicha.jpg" alt="Baghdadi Date Kleicha" loading="lazy"/>
+          <div class="pcard-hover-box">
+            <button class="pcard-btn-add" onclick="addToCart('كليجة بغدادية بالتمر', 18000, '🥮')">Add to Cart</button>
+            <button class="pcard-btn-view" onclick="openModal('kleicha-date')">View</button>
           </div>
         </div>
-
-        <div class="modal-actions-row">
-          <div class="modal-qty-counter">
-            <button class="qty-btn" onclick="changeModalQty(-1)">−</button>
-            <span class="qty-val" id="modal-qty-val">1</span>
-            <button class="qty-btn" onclick="changeModalQty(1)">+</button>
+        <div class="pcard-info">
+          <div>
+            <div class="pcard-top-row">
+              <span class="pcard-cat">Kleicha & Pastries</span>
+              <button class="pcard-wish" onclick="toggleWish(this)">♡</button>
+            </div>
+            <h4 class="pcard-title">Baghdadi Date Kleicha</h4>
+            <span class="pcard-arabic">كليجة بغدادية بالتمر والهيل</span>
           </div>
-          <button class="modal-add-btn" onclick="addModalItemToCart()">
-            Add to Order Bag →
-          </button>
+          <div class="pcard-prices">
+            <span class="pcard-now">18,000 د.ع</span>
+            <span class="pcard-was">24,000 د.ع</span>
+          </div>
         </div>
+      </article>
 
+      <!-- 2. Walnut Kleicha -->
+      <article class="pcard" data-category="kleicha">
+        <div class="pcard-thumb">
+          <img src="images/kleicha-walnut.jpg" alt="Iraqi Walnut Kleicha" loading="lazy"/>
+          <div class="pcard-hover-box">
+            <button class="pcard-btn-add" onclick="addToCart('كليجة عراقية بالجوز', 20000, '🥟')">Add to Cart</button>
+            <button class="pcard-btn-view" onclick="openModal('kleicha-walnut')">View</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div>
+            <div class="pcard-top-row">
+              <span class="pcard-cat">Kleicha & Pastries</span>
+              <button class="pcard-wish" onclick="toggleWish(this)">♡</button>
+            </div>
+            <h4 class="pcard-title">Iraqi Walnut Kleicha</h4>
+            <span class="pcard-arabic">كليجة عراقية بالجوز والهيل</span>
+          </div>
+          <div class="pcard-prices">
+            <span class="pcard-now">20,000 د.ع</span>
+            <span class="pcard-was">26,000 د.ع</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. Daheen Najafi -->
+      <article class="pcard" data-category="sweets">
+        <div class="pcard-thumb">
+          <img src="images/daheen-tray.jpg" alt="Daheen Najafi Al-Malaki" loading="lazy"/>
+          <div class="pcard-hover-box">
+            <button class="pcard-btn-add" onclick="addToCart('دهين نجفي ملكي بالدهن الحر', 24000, '🍯')">Add to Cart</button>
+            <button class="pcard-btn-view" onclick="openModal('daheen-najafi')">View</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div>
+            <div class="pcard-top-row">
+              <span class="pcard-cat">Najaf Confectionery</span>
+              <button class="pcard-wish" onclick="toggleWish(this)">♡</button>
+            </div>
+            <h4 class="pcard-title">Daheen Najafi Al-Malaki</h4>
+            <span class="pcard-arabic">دهين نجفي ملكي بالدهن الحر</span>
+          </div>
+          <div class="pcard-prices">
+            <span class="pcard-now">24,000 د.ع</span>
+            <span class="pcard-was">32,000 د.ع</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. Wide Card: Royal Diyafa Assortment -->
+      <article class="pcard pcard--wide" data-category="breakfast">
+        <div class="pcard-thumb">
+          <img src="images/royal-assortment.jpg" alt="Festive Diyafa Collection" loading="lazy"/>
+          <div class="pcard-feature-badge">Festive Collection ✦</div>
+          <div class="pcard-hover-box">
+            <button class="pcard-btn-add" onclick="addToCart('صينية ضيافة الملوك الملكية', 68000, '👑')">Add to Cart</button>
+            <button class="pcard-btn-view" onclick="openModal('royal-box')">View</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div>
+            <div class="pcard-top-row">
+              <span class="pcard-cat">Best Seller • Grand Box</span>
+              <button class="pcard-wish" onclick="toggleWish(this)">♡</button>
+            </div>
+            <h4 class="pcard-title">Royal Diyafa Eid Grand Tray</h4>
+            <span class="pcard-arabic">صينية ضيافة الملوك الملكية المشكلة</span>
+          </div>
+          <div class="pcard-prices">
+            <span class="pcard-now">68,000 د.ع</span>
+            <span class="pcard-was">85,000 د.ع</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. Zenood El Sit -->
+      <article class="pcard" data-category="sweets">
+        <div class="pcard-thumb">
+          <img src="images/zenood-el-sit.jpg" alt="Zenood El Sit Al-Baghdadia" loading="lazy"/>
+          <div class="pcard-hover-box">
+            <button class="pcard-btn-add" onclick="addToCart('زنود الست بالقشطة والفستق', 16000, '🥟')">Add to Cart</button>
+            <button class="pcard-btn-view" onclick="openModal('zenood-el-sit')">View</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div>
+            <div class="pcard-top-row">
+              <span class="pcard-cat">Fresh Ashta Pastries</span>
+              <button class="pcard-wish" onclick="toggleWish(this)">♡</button>
+            </div>
+            <h4 class="pcard-title">Zenood El Sit Al-Baghdadia</h4>
+            <span class="pcard-arabic">زنود الست بالقشطة العربية والفستق</span>
+          </div>
+          <div class="pcard-prices">
+            <span class="pcard-now">16,000 د.ع</span>
+            <span class="pcard-was">22,000 د.ع</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6. Royal Baqlawa -->
+      <article class="pcard" data-category="sweets">
+        <div class="pcard-thumb">
+          <img src="images/baklava.jpg" alt="Royal Pistachio Baqlawa" loading="lazy"/>
+          <div class="pcard-hover-box">
+            <button class="pcard-btn-add" onclick="addToCart('بقلاوة بالفستق والدهن الحر', 34000, '🥮')">Add to Cart</button>
+            <button class="pcard-btn-view" onclick="openModal('baklava')">View</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div>
+            <div class="pcard-top-row">
+              <span class="pcard-cat">Royal Baqlawa</span>
+              <button class="pcard-wish" onclick="toggleWish(this)">♡</button>
+            </div>
+            <h4 class="pcard-title">Royal Pistachio Baqlawa</h4>
+            <span class="pcard-arabic">بقلاوة عراقية فاخرة بالفستق والدهن الحر</span>
+          </div>
+          <div class="pcard-prices">
+            <span class="pcard-now">34,000 د.ع</span>
+            <span class="pcard-was">42,000 د.ع</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 7. Kahi & Geymar -->
+      <article class="pcard" data-category="breakfast">
+        <div class="pcard-thumb">
+          <img src="images/kahi-geymar.jpg" alt="Kahi & Geymar Arab Set" loading="lazy"/>
+          <div class="pcard-hover-box">
+            <button class="pcard-btn-add" onclick="addToCart('كاهي بغدادي وقيمر عرب وعسل', 15000, '🥞')">Add to Cart</button>
+            <button class="pcard-btn-view" onclick="openModal('kahi-geymar')">View</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div>
+            <div class="pcard-top-row">
+              <span class="pcard-cat">Breakfast Ritual</span>
+              <button class="pcard-wish" onclick="toggleWish(this)">♡</button>
+            </div>
+            <h4 class="pcard-title">Kahi & Geymar Arab Set</h4>
+            <span class="pcard-arabic">كاهي بغدادي وقيمر عرب وعسل سدر</span>
+          </div>
+          <div class="pcard-prices">
+            <span class="pcard-now">15,000 د.ع</span>
+            <span class="pcard-was">19,000 د.ع</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 8. Stone Samoon -->
+      <article class="pcard" data-category="breads">
+        <div class="pcard-thumb">
+          <img src="images/samoon-hijri.jpg" alt="Iraqi Stone Samoon" loading="lazy"/>
+          <div class="pcard-hover-box">
+            <button class="pcard-btn-add" onclick="addToCart('صمون حجري عراقي طازج (10 قطع)', 3000, '🥖')">Add to Cart</button>
+            <button class="pcard-btn-view" onclick="openModal('samoon')">View</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div>
+            <div class="pcard-top-row">
+              <span class="pcard-cat">Hearth Stone Ovens</span>
+              <button class="pcard-wish" onclick="toggleWish(this)">♡</button>
+            </div>
+            <h4 class="pcard-title">Iraqi Stone Samoon (10 Pcs)</h4>
+            <span class="pcard-arabic">صمون حجري عراقي طازج من الفرن</span>
+          </div>
+          <div class="pcard-prices">
+            <span class="pcard-now">3,000 د.ع</span>
+            <span class="pcard-was">4,500 د.ع</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 9. Khubz Tannour -->
+      <article class="pcard" data-category="breads">
+        <div class="pcard-thumb">
+          <img src="images/khubz-tannour.jpg" alt="Khubz Tannour Bil Simsim" loading="lazy"/>
+          <div class="pcard-hover-box">
+            <button class="pcard-btn-add" onclick="addToCart('خبز تنور عراقي بالسمسم (8 أرغفة)', 4000, '🫓')">Add to Cart</button>
+            <button class="pcard-btn-view" onclick="openModal('tannour')">View</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div>
+            <div class="pcard-top-row">
+              <span class="pcard-cat">Clay Oven Flatbread</span>
+              <button class="pcard-wish" onclick="toggleWish(this)">♡</button>
+            </div>
+            <h4 class="pcard-title">Khubz Tannour Bil Simsim</h4>
+            <span class="pcard-arabic">خبز تنور عراقي أصيل بالسمسم (8 أرغفة)</span>
+          </div>
+          <div class="pcard-prices">
+            <span class="pcard-now">4,000 د.ع</span>
+            <span class="pcard-was">5,500 د.ع</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 10. Golden Zalabia -->
+      <article class="pcard" data-category="sweets">
+        <div class="pcard-thumb">
+          <img src="images/zalabia.jpg" alt="Crispy Golden Zalabia" loading="lazy"/>
+          <div class="pcard-hover-box">
+            <button class="pcard-btn-add" onclick="addToCart('زلابية عراقية مقرمشة بماء الورد', 11000, '🥨')">Add to Cart</button>
+            <button class="pcard-btn-view" onclick="openModal('zalabia')">View</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div>
+            <div class="pcard-top-row">
+              <span class="pcard-cat">Crispy Sweets</span>
+              <button class="pcard-wish" onclick="toggleWish(this)">♡</button>
+            </div>
+            <h4 class="pcard-title">Crispy Golden Zalabia</h4>
+            <span class="pcard-arabic">زلابية عراقية مقرمشة بماء الورد</span>
+          </div>
+          <div class="pcard-prices">
+            <span class="pcard-now">11,000 د.ع</span>
+            <span class="pcard-was">14,000 د.ع</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 11. Golden Awama -->
+      <article class="pcard" data-category="sweets">
+        <div class="pcard-thumb">
+          <img src="images/luqaimat.jpg" alt="Golden Awama & Luqaimat" loading="lazy"/>
+          <div class="pcard-hover-box">
+            <button class="pcard-btn-add" onclick="addToCart('عوّامة ولقيمات مقرمشة بالدبس', 10000, '🍯')">Add to Cart</button>
+            <button class="pcard-btn-view" onclick="openModal('luqaimat')">View</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div>
+            <div class="pcard-top-row">
+              <span class="pcard-cat">Syrup Dumplings</span>
+              <button class="pcard-wish" onclick="toggleWish(this)">♡</button>
+            </div>
+            <h4 class="pcard-title">Golden Awama & Luqaimat</h4>
+            <span class="pcard-arabic">عوّامة ولقيمات مقرمشة بالدبس والهيل</span>
+          </div>
+          <div class="pcard-prices">
+            <span class="pcard-now">10,000 د.ع</span>
+            <span class="pcard-was">13,000 د.ع</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 12. Damascene-Baghdadi Barazek -->
+      <article class="pcard" data-category="kleicha">
+        <div class="pcard-thumb">
+          <img src="images/barazek.jpg" alt="Damascene-Baghdadi Barazek" loading="lazy"/>
+          <div class="pcard-hover-box">
+            <button class="pcard-btn-add" onclick="addToCart('برازق فاخرة بالسمسم والفستق', 13000, '🍪')">Add to Cart</button>
+            <button class="pcard-btn-view" onclick="openModal('barazek')">View</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div>
+            <div class="pcard-top-row">
+              <span class="pcard-cat">Sesame Biscuits</span>
+              <button class="pcard-wish" onclick="toggleWish(this)">♡</button>
+            </div>
+            <h4 class="pcard-title">Damascene-Baghdadi Barazek</h4>
+            <span class="pcard-arabic">برازق فاخرة بالسمسم والفستق الحلبي</span>
+          </div>
+          <div class="pcard-prices">
+            <span class="pcard-now">13,000 د.ع</span>
+            <span class="pcard-was">17,000 د.ع</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 13. Mhallabiya -->
+      <article class="pcard" data-category="sweets">
+        <div class="pcard-thumb">
+          <img src="images/mhallabiya.jpg" alt="Mhallabiya Bil Mistka" loading="lazy"/>
+          <div class="pcard-hover-box">
+            <button class="pcard-btn-add" onclick="addToCart('مهلبية ملكية بالمستكة والفستق', 10000, '🍮')">Add to Cart</button>
+            <button class="pcard-btn-view" onclick="openModal('mhallabiya')">View</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div>
+            <div class="pcard-top-row">
+              <span class="pcard-cat">Chilled Velvet Pudding</span>
+              <button class="pcard-wish" onclick="toggleWish(this)">♡</button>
+            </div>
+            <h4 class="pcard-title">Mhallabiya Bil Mistka & Rose</h4>
+            <span class="pcard-arabic">مهلبية ملكية بالمستكة والفستق الحلبي</span>
+          </div>
+          <div class="pcard-prices">
+            <span class="pcard-now">10,000 د.ع</span>
+            <span class="pcard-was">14,000 د.ع</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 14. Shakar Lama -->
+      <article class="pcard" data-category="kleicha">
+        <div class="pcard-thumb">
+          <img src="images/shakar-lama.jpg" alt="Baghdadi Shakar Lama" loading="lazy"/>
+          <div class="pcard-hover-box">
+            <button class="pcard-btn-add" onclick="addToCart('شكرلمة بغدادية بالهيل واللوز', 12000, '🥟')">Add to Cart</button>
+            <button class="pcard-btn-view" onclick="openModal('shakar-lama')">View</button>
+          </div>
+        </div>
+        <div class="pcard-info">
+          <div>
+            <div class="pcard-top-row">
+              <span class="pcard-cat">Traditional Melt Cookies</span>
+              <button class="pcard-wish" onclick="toggleWish(this)">♡</button>
+            </div>
+            <h4 class="pcard-title">Baghdadi Shakar Lama</h4>
+            <span class="pcard-arabic">شكرلمة بغدادية أصيلة بالهيل واللوز</span>
+          </div>
+          <div class="pcard-prices">
+            <span class="pcard-now">12,000 د.ع</span>
+            <span class="pcard-was">16,000 د.ع</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- OUR STORY -->
+<section class="section" id="story" style="border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="story-grid">
+      <div>
+        <p class="section-eyebrow">— OUR STORY</p>
+        <h2 class="story-title">
+          Born from<br/>
+          Baghdad.<br/>
+          Made for<br/>
+          the world.
+        </h2>
+      </div>
+      <div>
+        <div class="story-text">
+          <p>We are an Iraqi traditional bakery and sweets house rooted in Baghdad. Every bake tells a story — a story of clay ovens, fragrant cardamom, and generations of craftsmanship.</p>
+          <p>We believe traditional sweets shouldn't compromise on real ingredients. We use 100% clarified sheep ghee (دهن حر), single-origin Karbala Zahdi dates, and fresh water-buffalo ashta.</p>
+        </div>
+        <div class="story-nums">
+          <div><div class="story-num-val">500<sup>+</sup></div><div class="story-num-key">Daily Bakes</div></div>
+          <div><div class="story-num-val">10K<sup>+</sup></div><div class="story-num-key">Customers</div></div>
+          <div><div class="story-num-val">100<sup>%</sup></div><div class="story-num-key">Pure Ghee</div></div>
+          <div><div class="story-num-val">5★</div><div class="story-num-key">Avg Rating</div></div>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
+<!-- GIANT STACKED MENU LINKS (QREAM & KRDM SIGNATURE) -->
+<div class="giant-menu-links">
+  <a href="#collections" class="giant-menu-link">Collections</a>
+  <a href="#products" class="giant-menu-link">Products</a>
+  <a href="#story" class="giant-menu-link">Story</a>
+  <a href="#contact" class="giant-menu-link">Contact</a>
+</div>
 
-  <!-- ============================================================
-       SLIDE-OVER SHOPPING CART DRAWER
-       ============================================================ -->
-  <div class="cart-backdrop" id="cart-backdrop" onclick="closeCartDrawer()"></div>
+<!-- CTA BANNER -->
+<section class="cta-box">
+  <div class="container">
+    <h2 class="cta-title">Ready to taste<br/>your heritage?</h2>
+    <a href="#products" class="cta-btn">START SHOPPING →</a>
+  </div>
+</section>
 
-  <aside class="cart-drawer" id="cart-drawer">
-    <div class="cart-drawer-header">
-      <h3>Fresh Order Bag <span id="drawer-items-count">(0)</span></h3>
-      <button class="cart-close-btn" onclick="closeCartDrawer()" aria-label="Close Cart">✕</button>
+<!-- FOOTER -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">BAGHDADIA<span>.</span></div>
+        <p style="color: var(--white-dim); font-size: 0.9rem; margin-top: 8px;">Traditional Mesopotamian Bakes & Royal Confectionery.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Shop</h5>
+          <ul>
+            <li><a href="#products">Kleicha & Pastries</a></li>
+            <li><a href="#products">Daheen Najafi</a></li>
+            <li><a href="#products">Stone Samoon</a></li>
+            <li><a href="#products">Zenood El Sit</a></li>
+            <li><a href="#products">Gift Trays</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Help</h5>
+          <ul>
+            <li><a href="#">Fresh Delivery</a></li>
+            <li><a href="#">Storage & Heating</a></li>
+            <li><a href="#">Catering & Events</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:hello@baghdadia.iq">hello@baghdadia.iq</a></li>
+            <li><a href="tel:+9647701234567">+964 770 123 4567</a></li>
+            <li><a href="#">Al-Karrada, Baghdad, Iraq</a></li>
+            <li><a href="#">Dream City, Erbil, Iraq</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="cart-drawer-body">
-      <!-- Empty State -->
-      <div class="cart-empty-state" id="cart-empty-state">
-        <div class="empty-icon">🥮</div>
-        <h4>Your bakery bag is empty</h4>
-        <p>Explore our fresh stone-hearth bakes and royal confectionery.</p>
-        <button class="nav-pill-btn" onclick="closeCartDrawer(); location.href='#products'">
-          Explore Menu →
-        </button>
+    <div class="footer-bottom">
+      <span>© 2026 BAGHDADIA. Handcrafted with pride in Baghdad & Erbil.</span>
+      <div class="footer-pay">
+        <span>CASH ON DELIVERY</span>
+        <span>ZAINCASH</span>
+        <span>QI CARD</span>
+        <span>VISA</span>
       </div>
-
-      <!-- Item Rows Container -->
-      <div id="cart-items-list"></div>
     </div>
+  </div>
+</footer>
 
-    <div class="cart-drawer-footer">
-      <div class="cart-delivery-selector">
-        <label>Select Delivery Governorate</label>
-        <select class="city-select-box" id="cart-city-select">
-          <option value="baghdad">Baghdad — Express Same Day (4,000 د.ع)</option>
-          <option value="erbil">Erbil — Express Same Day (5,000 د.ع)</option>
-          <option value="basra">Basra — Overnight Express (6,000 د.ع)</option>
-          <option value="najaf">Najaf & Karbala — Same Day (5,000 د.ع)</option>
-          <option value="sulaymaniyah">Sulaymaniyah — 24h Express (6,000 د.ع)</option>
-          <option value="other">Other Governorates — 24h Courier (6,000 د.ع)</option>
-        </select>
-      </div>
-
-      <div class="cart-totals-breakdown">
-        <div class="total-line">
-          <span>Pastry Subtotal</span>
-          <span id="cart-subtotal-val">0 د.ع</span>
-        </div>
-        <div class="total-line">
-          <span>Fresh Hearth Delivery</span>
-          <span id="cart-delivery-val">0 د.ع</span>
-        </div>
-        <div class="total-line grand">
-          <span>Grand Total</span>
-          <span id="cart-grandtotal-val">0 د.ع</span>
-        </div>
-      </div>
-
-      <button class="checkout-action-btn" onclick="handleCheckout()">
-        Proceed to Checkout (الدفع عند الاستلام) →
-      </button>
-    </div>
-  </aside>
-
-
-  <!-- ============================================================
-       CHECKOUT SUCCESS MODAL
-       ============================================================ -->
-  <div class="modal-backdrop" id="checkout-success-modal" onclick="if(event.target===this) closeSuccessModal()">
-    <div class="success-dialog-card">
-      <div class="success-icon-seal">✓</div>
-      <h3>Order Received! (تم استلام طلبك)</h3>
-      <p>
-        Our master bakers have received your fresh order and will begin packaging immediately from our stone hearths.
-      </p>
-      <div class="success-order-id">
-        Order ID: <span id="success-order-id-val">#BGH-5821</span>
-      </div>
-      <p style="font-size: 0.85rem; color: var(--cream-dim);">
-        Our delivery driver will reach out via WhatsApp before dispatch. Cash on delivery accepted.
-      </p>
-      <button class="nav-pill-btn" onclick="closeSuccessModal()" style="margin-top: 10px;">
-        Back to Bakery Hearth
+<!-- SLIDE-OVER CART DRAWER -->
+<div class="cart-backdrop" id="cart-backdrop" onclick="closeCart()"></div>
+<aside class="cart-drawer" id="cart-drawer">
+  <div class="cart-head">
+    <h3>Cart <span id="cart-head-count">(0)</span></h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-body" id="cart-body">
+    <div class="cart-empty" id="cart-empty-state">
+      <span>Your cart is empty</span>
+      <button class="cta-btn" onclick="closeCart(); document.querySelector('#products').scrollIntoView({behavior:'smooth'})" style="padding: 10px 24px; font-size: 0.8rem; margin-top: 10px;">
+        Start shopping →
       </button>
     </div>
   </div>
+  <div class="cart-foot">
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span id="cart-total-price">0 د.ع</span>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">Checkout →</button>
+  </div>
+</aside>
 
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal-backdrop" id="modal-backdrop" onclick="if(event.target===this) closeModal()">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-img-box">
+      <img id="modal-img" src="" alt="Product Detail"/>
+    </div>
+    <div class="modal-info-box">
+      <div>
+        <span class="modal-cat" id="modal-cat">Category</span>
+        <h3 class="modal-name" id="modal-name">Product Name</h3>
+        <span class="modal-arabic" id="modal-arabic">الاسم العربي</span>
+        <div class="modal-price" id="modal-price">0 د.ع</div>
+        <p class="modal-desc" id="modal-desc">Description</p>
+      </div>
+      <button class="modal-btn-add" id="modal-add-btn">Add to Cart</button>
+    </div>
+  </div>
+</div>
 
-  <!-- ============================================================
-       FLOATING TOAST NOTIFICATION
-       ============================================================ -->
-  <div class="toast-notice" id="toast-notice"></div>
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
-  <!-- JavaScript -->
-  <script src="js/main.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
