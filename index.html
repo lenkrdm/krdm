@@ -3,593 +3,722 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KRDM FOR SALE — Kurdish Traditional Clothing</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>K</text></svg>"/>
+  <title>BAGHDADIA (بغدادية) — Traditional Iraqi Bakery & Sweets</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23f59e0b'>🌾</text></svg>"/>
+  
+  <!-- Google Fonts: Outfit (Sans), Playfair Display (Serif), Cairo (Arabic) -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet"/>
+  
+  <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
-<!-- ░░░ CURSOR ░░░ -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-follower" id="cursor-follower"></div>
+  <!-- ============================================================
+       CUSTOM CURSOR (Amber Glow Dot + Lag Ring)
+       ============================================================ -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
 
-<!-- ░░░ LOADER ░░░ -->
-<div class="loader" id="loader">
-  <div class="loader-inner">
-    <div class="loader-logo">KRDM</div>
-    <div class="loader-bar"><div class="loader-fill" id="loader-fill"></div></div>
-  </div>
-</div>
-
-<!-- ░░░ NAV ░░░ -->
-<nav class="nav" id="nav">
-  <a href="#" class="nav-logo">KRDM<span>.</span></a>
-  <div class="nav-links">
-    <a href="#work" class="nav-link">Collections</a>
-    <a href="#services" class="nav-link">Products</a>
-    <a href="#about" class="nav-link">Story</a>
-    <a href="#contact" class="nav-link">Contact</a>
-  </div>
-  <button class="nav-cart" id="nav-cart-btn" onclick="openCart()">
-    Cart <span class="cart-count" id="cart-count">0</span>
-  </button>
-  <button class="nav-burger" id="nav-burger">
-    <span></span><span></span>
-  </button>
-</nav>
-
-<!-- Mobile menu -->
-<div class="mobile-menu" id="mobile-menu">
-  <a href="#work"     onclick="closeMobileMenu()">Collections</a>
-  <a href="#services" onclick="closeMobileMenu()">Products</a>
-  <a href="#about"    onclick="closeMobileMenu()">Story</a>
-  <a href="#contact"  onclick="closeMobileMenu()">Contact</a>
-</div>
-
-<!-- ░░░ HERO ░░░ -->
-<section class="hero" id="hero">
-  <div class="hero-bg-text" aria-hidden="true">KURDISH</div>
-
-  <div class="hero-content">
-    <div class="hero-tag reveal-up">Traditional Heritage — New Collection 2026</div>
-    <h1 class="hero-title">
-      <span class="line reveal-up" data-delay="0">Wear the</span>
-      <span class="line line-italic reveal-up" data-delay="100">Colors of</span>
-      <span class="line reveal-up" data-delay="200">Kurdistan<span class="dot">.</span></span>
-    </h1>
-    <div class="hero-bottom reveal-up" data-delay="400">
-      <p class="hero-desc">Authentic handcrafted traditional Kurdish clothing — rich fabric, vibrant patterns, and timeless style worn by generations.</p>
-      <a href="#work" class="btn-main">
-        <span>Shop Now</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+  <!-- ============================================================
+       FULLSCREEN PRELOADER
+       ============================================================ -->
+  <div class="loader-screen" id="loader-screen">
+    <div class="loader-brand">BAGHDADIA<span>.</span></div>
+    <div class="loader-sub">المخبز البغدادي الأصيل ✦ منذ ١٩٥٤</div>
+    <div class="loader-progress-wrap">
+      <div class="loader-progress-bar" id="loader-progress-bar"></div>
     </div>
+    <div class="loader-percentage" id="loader-percentage">0%</div>
   </div>
 
-  <div class="hero-stats reveal-up" data-delay="500">
-    <div class="stat">
-      <span class="stat-num">500<sup>+</sup></span>
-      <span class="stat-label">Products</span>
+  <!-- ============================================================
+       STICKY MINIMAL NAVIGATION
+       ============================================================ */ -->
+  <header class="nav-header" id="nav-header">
+    <div class="nav-left">
+      <a href="#hero" class="nav-logo">BAGHDADIA<span>.</span></a>
+      <span class="nav-arabic-mark">مخبوزات وحلويات بغداد</span>
     </div>
-    <div class="stat-divider"></div>
-    <div class="stat">
-      <span class="stat-num">10K<sup>+</sup></span>
-      <span class="stat-label">Customers</span>
+
+    <nav class="nav-center">
+      <a href="#products" class="nav-menu-link">Artisanal Bakes</a>
+      <a href="#craft" class="nav-menu-link">Stone Hearth</a>
+      <a href="#heritage" class="nav-menu-link">Generations</a>
+      <a href="#collab" class="nav-menu-link">Bespoke Catering</a>
+      <a href="#contact" class="nav-menu-link">Hearth Locations</a>
+    </nav>
+
+    <div class="nav-right">
+      <button class="nav-audio-btn" id="audio-toggle-btn" onclick="toggleAudio()" title="Sound: Enabled">
+        🔊
+      </button>
+
+      <button class="nav-pill-btn" onclick="openCartDrawer()">
+        Order Bag <span class="nav-cart-badge" id="nav-cart-badge">0</span>
+      </button>
+
+      <button class="nav-burger-btn" id="nav-burger-btn" onclick="toggleMobileNav()" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+      </button>
     </div>
-    <div class="stat-divider"></div>
-    <div class="stat">
-      <span class="stat-num">30<sup>+</sup></span>
-      <span class="stat-label">Countries</span>
+  </header>
+
+  <!-- ============================================================
+       MOBILE FULLSCREEN MENU
+       ============================================================ -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <div class="mobile-nav-links">
+      <a href="#hero" class="mobile-nav-item" onclick="closeMobileNav()"><span>01</span>Home</a>
+      <a href="#products" class="mobile-nav-item" onclick="closeMobileNav()"><span>02</span>Menu & Sweets</a>
+      <a href="#craft" class="mobile-nav-item" onclick="closeMobileNav()"><span>03</span>Stone Hearth</a>
+      <a href="#heritage" class="mobile-nav-item" onclick="closeMobileNav()"><span>04</span>Generations</a>
+      <a href="#collab" class="mobile-nav-item" onclick="closeMobileNav()"><span>05</span>Catering Inquiry</a>
+    </div>
+    <div class="mobile-nav-footer">
+      <span>Al-Karrada Al-Sharqiya, Baghdad, Iraq</span>
+      <span>+964 770 123 4567 • info@baghdadia.iq</span>
     </div>
   </div>
 
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="scroll-line"><div class="scroll-dot"></div></div>
-  </div>
-</section>
+  <!-- ============================================================
+       PINNED HERO SECTION (Qream Signature 3D Perspective + Pin)
+       ============================================================ -->
+  <div class="hero-pin-wrapper" id="hero">
+    <div class="hero-pinned">
+      <div class="hero-perspective-box" id="hero-perspective-box">
+        
+        <!-- Ambient Radial Glow -->
+        <div class="hero-ambient-glow"></div>
 
-<!-- ░░░ MARQUEE ░░░ -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span>WOMEN'S COLLECTION</span><span class="dot-sep">✦</span>
-    <span>MEN'S TRADITIONAL</span><span class="dot-sep">✦</span>
-    <span>CHILDREN'S WEAR</span><span class="dot-sep">✦</span>
-    <span>BRIDAL GOWNS</span><span class="dot-sep">✦</span>
-    <span>ACCESSORIES</span><span class="dot-sep">✦</span>
-    <span>NEW ARRIVALS 2026</span><span class="dot-sep">✦</span>
-    <span>WOMEN'S COLLECTION</span><span class="dot-sep">✦</span>
-    <span>MEN'S TRADITIONAL</span><span class="dot-sep">✦</span>
-    <span>CHILDREN'S WEAR</span><span class="dot-sep">✦</span>
-    <span>BRIDAL GOWNS</span><span class="dot-sep">✦</span>
-    <span>ACCESSORIES</span><span class="dot-sep">✦</span>
-    <span>NEW ARRIVALS 2026</span><span class="dot-sep">✦</span>
-  </div>
-</div>
+        <!-- Giant Background Watermark Text -->
+        <div class="hero-ghost-word" aria-hidden="true">BAGHDAD</div>
 
-<!-- ░░░ WHAT WE DO ░░░ -->
-<section class="services" id="services">
-  <div class="section-label reveal-up">What we offer</div>
-  <div class="services-grid">
+        <!-- Rotating Circular Stamp Seal (Qream Style) -->
+        <div class="hero-circular-stamp">
+          <svg viewBox="0 0 200 200" class="stamp-svg">
+            <defs>
+              <path id="stamp-path" d="M 100,100 m -75,0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"/>
+            </defs>
+            <text>
+              <textPath href="#stamp-path" startOffset="0%">
+                ✦ TRADITIONAL IRAQI BAKERY ✦ BAGHDAD ✦ SINCE 1954 ✦ PURE SHEEP GHEE ✦
+              </textPath>
+            </text>
+          </svg>
+          <div class="stamp-center-icon">🌾</div>
+        </div>
 
-    <div class="service-item reveal-up" data-delay="0">
-      <div class="service-num">01</div>
-      <div class="service-body">
-        <h3>Women's Collection</h3>
-        <p>Elegant traditional dresses, blouses, and full sets crafted with premium fabric and vivid Kurdish embroidery patterns.</p>
-        <a href="#work" class="service-link">Browse <span>→</span></a>
+        <!-- Hero Top Meta -->
+        <div class="hero-top-meta">
+          <div class="hero-pill-tag">
+            <span class="hero-pill-dot"></span>
+            Stone Hearth & Pure Sheep Ghee (دهن حر)
+          </div>
+          <div class="hero-top-coords">
+            33.3152° N, 44.3661° E — MESOPOTAMIA
+          </div>
+        </div>
+
+        <!-- Hero Main Title (Bold Sans + Serif Italic Alternating Lines) -->
+        <div class="hero-title-container">
+          <h1 class="hero-main-title">
+            <div class="hero-line"><span>DEFYING</span></div>
+            <div class="hero-line serif-italic"><span>THE ORDINARY</span></div>
+            <div class="hero-line"><span>FOR MESOPOTAMIAN</span></div>
+            <div class="hero-line serif-italic"><span>SWEETS & BAKES<span class="dot">.</span></span></div>
+          </h1>
+        </div>
+
+        <!-- Hero Bottom Row: Stats & Scroll Down -->
+        <div class="hero-bottom-row">
+          <div class="hero-stats-group">
+            <div class="hero-stat-item">
+              <span class="stat-number">1954<sup>EST</sup></span>
+              <span class="stat-label">Baghdad Founding</span>
+            </div>
+            <div class="hero-stat-item">
+              <span class="stat-number">100<sup>%</sup></span>
+              <span class="stat-label">Pure Dihin Hor Ghee</span>
+            </div>
+            <div class="hero-stat-item">
+              <span class="stat-number">45K<sup>+</sup></span>
+              <span class="stat-label">Monthly Bakes</span>
+            </div>
+            <div class="hero-stat-item">
+              <span class="stat-number">14<sup>+</sup></span>
+              <span class="stat-label">Master Recipes</span>
+            </div>
+          </div>
+
+          <div class="hero-scroll-indicator">
+            <span>Explore Hearth</span>
+            <div class="scroll-arrow-circle">↓</div>
+          </div>
+        </div>
+
       </div>
-    </div>
-
-    <div class="service-item reveal-up" data-delay="100">
-      <div class="service-num">02</div>
-      <div class="service-body">
-        <h3>Men's Attire</h3>
-        <p>Classic Kurdish suits, vests, and ceremonial wear tailored for comfort and cultural pride at every occasion.</p>
-        <a href="#work" class="service-link">Browse <span>→</span></a>
-      </div>
-    </div>
-
-    <div class="service-item reveal-up" data-delay="200">
-      <div class="service-num">03</div>
-      <div class="service-body">
-        <h3>Children's Wear</h3>
-        <p>Soft, vibrant traditional outfits for kids — from baby sets to teenage ceremony wear. Designed for comfort and culture.</p>
-        <a href="#work" class="service-link">Browse <span>→</span></a>
-      </div>
-    </div>
-
-    <div class="service-item reveal-up" data-delay="300">
-      <div class="service-num">04</div>
-      <div class="service-body">
-        <h3>Bridal & Ceremony</h3>
-        <p>Gold-embroidered bridal gowns and limited ceremonial pieces handcrafted by master artisans from Erbil.</p>
-        <a href="#work" class="service-link">Browse <span>→</span></a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ░░░ PRODUCTS ░░░ -->
-<section class="work" id="work">
-  <div class="work-header">
-    <div class="section-label reveal-up">Featured products</div>
-    <div class="work-filter reveal-up">
-      <button class="filter-pill active" data-filter="all">All</button>
-      <button class="filter-pill" data-filter="women">Women's</button>
-      <button class="filter-pill" data-filter="men">Men's</button>
-      <button class="filter-pill" data-filter="children">Children's</button>
-      <button class="filter-pill" data-filter="bridal">Bridal</button>
-      <button class="filter-pill" data-filter="accessories">Accessories</button>
     </div>
   </div>
 
-  <div class="work-grid" id="work-grid">
+  <!-- ============================================================
+       SCROLL CONTENT (Slides Up Over the Pinned Hero)
+       ============================================================ -->
+  <div class="scroll-content-wrapper">
 
-    <!-- PRODUCT 1 -->
-    <article class="work-item reveal-up" data-category="women" data-delay="0">
-      <div class="work-img">
-        <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&q=80&fit=crop" alt="Dilan Traditional Dress" loading="lazy"/>
-        <div class="work-overlay">
-          <button class="work-add" onclick="addToCart('فستان ديلان التقليدي', 51000, '👗','#c0392b')">Add to Cart</button>
-        </div>
+    <!-- CONTINUOUS MARQUEE RIBBON -->
+    <div class="marquee-ribbon">
+      <div class="marquee-track">
+        <span class="marquee-item">BAGHDADI DATE KLEICHA <span class="marquee-sep">✦</span> كليجة بالتمر</span>
+        <span class="marquee-item">DAHEEN NAJAFI AL-MALAKI <span class="marquee-sep">✦</span> دهين نجفي</span>
+        <span class="marquee-item">STONE-BAKED SAMOON HIJRI <span class="marquee-sep">✦</span> صمون حجري</span>
+        <span class="marquee-item">ZENOUD EL SIT PASTRIES <span class="marquee-sep">✦</span> زنود الست</span>
+        <span class="marquee-item">KAHI & GEYMAR ARAB <span class="marquee-sep">✦</span> كاهي وقيمر</span>
+        <span class="marquee-item">ROYAL PISTACHIO BAQLAWA <span class="marquee-sep">✦</span> بقلاوة بالفستق</span>
+        <span class="marquee-item">KHUBZ TANNOUR BIL SIMSIM <span class="marquee-sep">✦</span> خبز تنور</span>
+        <span class="marquee-item">CRISPY GOLDEN ZALABIA <span class="marquee-sep">✦</span> زلابية مقرمشة</span>
+        <!-- Duplicated track for seamless loop -->
+        <span class="marquee-item">BAGHDADI DATE KLEICHA <span class="marquee-sep">✦</span> كليجة بالتمر</span>
+        <span class="marquee-item">DAHEEN NAJAFI AL-MALAKI <span class="marquee-sep">✦</span> دهين نجفي</span>
+        <span class="marquee-item">STONE-BAKED SAMOON HIJRI <span class="marquee-sep">✦</span> صمون حجري</span>
+        <span class="marquee-item">ZENOUD EL SIT PASTRIES <span class="marquee-sep">✦</span> زنود الست</span>
+        <span class="marquee-item">KAHI & GEYMAR ARAB <span class="marquee-sep">✦</span> كاهي وقيمر</span>
+        <span class="marquee-item">ROYAL PISTACHIO BAQLAWA <span class="marquee-sep">✦</span> بقلاوة بالفستق</span>
+        <span class="marquee-item">KHUBZ TANNOUR BIL SIMSIM <span class="marquee-sep">✦</span> خبز تنور</span>
+        <span class="marquee-item">CRISPY GOLDEN ZALABIA <span class="marquee-sep">✦</span> زلابية مقرمشة</span>
       </div>
-      <div class="work-info">
-        <div class="work-meta">
-          <span class="work-cat">Women's Dress</span>
-          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
-        </div>
-        <h4 class="work-name">Dilan Traditional Dress</h4>
-        <div class="work-price">
-          <span class="price-now">51,000 د.ع</span>
-          <span class="price-was">72,000 د.ع</span>
-        </div>
-      </div>
-    </article>
+    </div>
 
-    <!-- PRODUCT 2 -->
-    <article class="work-item reveal-up" data-category="women" data-delay="100">
-      <div class="work-img">
-        <img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=600&q=80&fit=crop" alt="Gulê Embroidered Blouse" loading="lazy"/>
-        <div class="work-overlay">
-          <button class="work-add" onclick="addToCart('بلوزة گولê المطرزة', 39000, '👘','#2d7a35')">Add to Cart</button>
-        </div>
-      </div>
-      <div class="work-info">
-        <div class="work-meta">
-          <span class="work-cat">Women's Blouse</span>
-          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
-        </div>
-        <h4 class="work-name">Gulê Embroidered Blouse</h4>
-        <div class="work-price">
-          <span class="price-now">39,000 د.ع</span>
-          <span class="price-was">58,000 د.ع</span>
-        </div>
-      </div>
-    </article>
+    <!-- SECTION 01: CRAFT & PILLARS (Qream 01 02 03 04) -->
+    <section class="pillars-section" id="craft">
+      <div class="container">
+        <p class="section-eyebrow">Master Hearth Craftsmanship</p>
+        <h2 class="section-main-heading">
+          Defying commercial shortcuts with <em>stone hearths, pure ghee,</em> and generational time.
+        </h2>
 
-    <!-- PRODUCT 3 -->
-    <article class="work-item reveal-up" data-category="men" data-delay="200">
-      <div class="work-img">
-        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=80&fit=crop" alt="Karwan Classic Vest" loading="lazy"/>
-        <div class="work-overlay">
-          <button class="work-add" onclick="addToCart('صدرية كارزان الكلاسيكية', 59000, '🧥','#2563eb')">Add to Cart</button>
-        </div>
-      </div>
-      <div class="work-info">
-        <div class="work-meta">
-          <span class="work-cat">Men's Vest</span>
-          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
-        </div>
-        <h4 class="work-name">Karwan Classic Vest</h4>
-        <div class="work-price">
-          <span class="price-now">59,000 د.ع</span>
-          <span class="price-was">81,000 د.ع</span>
-        </div>
-      </div>
-    </article>
+        <div class="pillars-grid">
+          
+          <div class="pillar-row">
+            <span class="pillar-number">01</span>
+            <div class="pillar-content">
+              <h3>Stone Tannour & Hearth Breads <span class="arabic">صمون حجري وخبز تنور</span></h3>
+              <p>Hand-kneaded wild sourdough slapped against 450°C refractory stone and burning clay tannour walls. Blistered, airy, and crackling with authentic hearth smoke.</p>
+            </div>
+            <a href="#products" class="pillar-arrow">→</a>
+          </div>
 
-    <!-- PRODUCT 4 — CHILDREN BANNER -->
-    <article class="work-item work-item--wide reveal-up" data-category="children" data-delay="0">
-      <div class="work-img work-img--feature">
-        <img src="https://images.unsplash.com/photo-1519278409-1f56fdda7fe5?w=1200&q=80&fit=crop" alt="Children's Collection" loading="lazy"/>
-        <div class="feature-label">Children's Collection ✦</div>
-        <div class="work-overlay">
-          <button class="work-add" onclick="addToCart('طقم شيرين الكردي', 33000,'🧒','#8B2DB8')">Add to Cart</button>
-        </div>
-      </div>
-      <div class="work-info">
-        <div class="work-meta">
-          <span class="work-cat">Children's Outfit — Best Seller</span>
-          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
-        </div>
-        <h4 class="work-name">Şirine Mini Kurdish Set</h4>
-        <div class="work-price">
-          <span class="price-now">33,000 د.ع</span>
-          <span class="price-was">46,000 د.ع</span>
-        </div>
-      </div>
-    </article>
+          <div class="pillar-row">
+            <span class="pillar-number">02</span>
+            <div class="pillar-content">
+              <h3>Heritage Kleicha & Date Biscuits <span class="arabic">كليجة الأعياد بالتمر والجوز</span></h3>
+              <p>The national treasure of Iraq. Hand-crimped pastries stuffed with caramelized Karbala Zahdi dates, mountain walnuts, cardamom, and pure sheep ghee (دهن حر).</p>
+            </div>
+            <a href="#products" class="pillar-arrow">→</a>
+          </div>
 
-    <!-- PRODUCT 5 -->
-    <article class="work-item reveal-up" data-category="children" data-delay="100">
-      <div class="work-img">
-        <img src="https://images.unsplash.com/photo-1471286174890-9c112ffca5b4?w=600&q=80&fit=crop" alt="Roonak Girls Dress" loading="lazy"/>
-        <div class="work-overlay">
-          <button class="work-add" onclick="addToCart('فستان رووناك للبنات', 28000,'👧','#e05a2b')">Add to Cart</button>
-        </div>
-      </div>
-      <div class="work-info">
-        <div class="work-meta">
-          <span class="work-cat">Girls' Dress</span>
-          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
-        </div>
-        <h4 class="work-name">Roonak Girls' Dress</h4>
-        <div class="work-price">
-          <span class="price-now">28,000 د.ع</span>
-          <span class="price-was">40,000 د.ع</span>
-        </div>
-      </div>
-    </article>
+          <div class="pillar-row">
+            <span class="pillar-number">03</span>
+            <div class="pillar-content">
+              <h3>Royal Confectionery & Daheen <span class="arabic">دهين نجفي وحلويات الملوك</span></h3>
+              <p>Slow-simmered Daheen Najafi drenched in date molasses and roasted coconut, crisp Zenood El Sit rolls bursting with buffalo ashta, and forty-layer pistachio Baqlawa.</p>
+            </div>
+            <a href="#products" class="pillar-arrow">→</a>
+          </div>
 
-    <!-- PRODUCT 6 -->
-    <article class="work-item reveal-up" data-category="children" data-delay="200">
-      <div class="work-img">
-        <img src="https://images.unsplash.com/photo-1503944583220-79d8926ad5e2?w=600&q=80&fit=crop" alt="Hawar Boys Suit" loading="lazy"/>
-        <div class="work-overlay">
-          <button class="work-add" onclick="addToCart('بدلة هاوار للأولاد', 36000,'👦','#1a9e6b')">Add to Cart</button>
-        </div>
-      </div>
-      <div class="work-info">
-        <div class="work-meta">
-          <span class="work-cat">Boys' Suit</span>
-          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
-        </div>
-        <h4 class="work-name">Hawar Boys' Traditional Suit</h4>
-        <div class="work-price">
-          <span class="price-now">36,000 د.ع</span>
-          <span class="price-was">52,000 د.ع</span>
-        </div>
-      </div>
-    </article>
+          <div class="pillar-row">
+            <span class="pillar-number">04</span>
+            <div class="pillar-content">
+              <h3>Bespoke Diyafa & Festive Gifting <span class="arabic">صواني الضيافة والمناسبات</span></h3>
+              <p>Engraved brass keepsake chests and custom hospitality assortments tailored for Iraqi weddings, Eid celebrations, official state receptions, and family gatherings.</p>
+            </div>
+            <a href="#collab" class="pillar-arrow">→</a>
+          </div>
 
-    <!-- PRODUCT 7 -->
-    <article class="work-item reveal-up" data-category="children" data-delay="300">
-      <div class="work-img">
-        <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=600&q=80&fit=crop" alt="Peri Baby Set" loading="lazy"/>
-        <div class="work-overlay">
-          <button class="work-add" onclick="addToCart('طقم بيري للرضع', 22000,'👶','#2ab8b8')">Add to Cart</button>
         </div>
       </div>
-      <div class="work-info">
-        <div class="work-meta">
-          <span class="work-cat">Baby Set</span>
-          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
-        </div>
-        <h4 class="work-name">Peri Baby Embroidered Set</h4>
-        <div class="work-price">
-          <span class="price-now">22,000 د.ع</span>
-          <span class="price-was">32,000 د.ع</span>
-        </div>
-      </div>
-    </article>
+    </section>
 
-    <!-- PRODUCT 8 -->
-    <article class="work-item reveal-up" data-category="children" data-delay="400">
-      <div class="work-img">
-        <img src="https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?w=600&q=80&fit=crop" alt="Zian Wedding Set" loading="lazy"/>
-        <div class="work-overlay">
-          <button class="work-add" onclick="addToCart('طقم زيان للأفراح', 48000,'🎀','#d4891a')">Add to Cart</button>
-        </div>
-      </div>
-      <div class="work-info">
-        <div class="work-meta">
-          <span class="work-cat">Children's Wedding</span>
-          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
-        </div>
-        <h4 class="work-name">Zian Wedding Ceremony Set</h4>
-        <div class="work-price">
-          <span class="price-now">48,000 د.ع</span>
-          <span class="price-was">68,000 د.ع</span>
-        </div>
-      </div>
-    </article>
+    <!-- SECTION 02: PRODUCTS & BAKES SHOWCASE (Qream Project Grid) -->
+    <section class="products-section" id="products">
+      <div class="container">
+        
+        <div class="products-filter-header">
+          <div>
+            <p class="section-eyebrow">Artisanal Bakery & Confectionery</p>
+            <h2 class="section-main-heading">Bakes we're <em>proud of.</em></h2>
+          </div>
 
-    <!-- PRODUCT 9 -->
-    <article class="work-item reveal-up" data-category="bridal" data-delay="0">
-      <div class="work-img">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80&fit=crop" alt="Zarîn Bridal Gown" loading="lazy"/>
-        <div class="work-overlay">
-          <button class="work-add" onclick="addToCart('ثوب زاريين للعرائس', 118000,'👰','#c07820')">Add to Cart</button>
+          <!-- Category filter buttons with item counts -->
+          <div class="filter-row">
+            <button class="filter-pill-btn active" data-filter="all">All Bakes <sup>14</sup></button>
+            <button class="filter-pill-btn" data-filter="kleicha">Kleicha & Biscuits <sup>4</sup></button>
+            <button class="filter-pill-btn" data-filter="sweets">Royal Sweets <sup>6</sup></button>
+            <button class="filter-pill-btn" data-filter="tannour">Stone Tannour <sup>2</sup></button>
+            <button class="filter-pill-btn" data-filter="breakfast">Kahi & Gift Boxes <sup>2</sup></button>
+          </div>
         </div>
-      </div>
-      <div class="work-info">
-        <div class="work-meta">
-          <span class="work-cat">Bridal — Limited</span>
-          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
-        </div>
-        <h4 class="work-name">Zarîn Bridal Gown</h4>
-        <div class="work-price">
-          <span class="price-now">118,000 د.ع</span>
-          <span class="price-was">183,000 د.ع</span>
-        </div>
-      </div>
-    </article>
 
-    <!-- PRODUCT 10 -->
-    <article class="work-item reveal-up" data-category="accessories" data-delay="0">
-      <div class="work-img">
-        <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80&fit=crop" alt="Kurdistani Headdress Belt" loading="lazy"/>
-        <div class="work-overlay">
-          <button class="work-add" onclick="addToCart('حزام الرأس الكردستاني', 26000,'💎','#b8860b')">Add to Cart</button>
+        <!-- 2px Gap Micro-Grid (Injected by JS) -->
+        <div class="products-grid" id="products-grid">
+          <!-- Dynamically populated by js/main.js -->
         </div>
-      </div>
-      <div class="work-info">
-        <div class="work-meta">
-          <span class="work-cat">Accessories</span>
-          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
-        </div>
-        <h4 class="work-name">Kurdistani Headdress Belt</h4>
-        <div class="work-price">
-          <span class="price-now">26,000 د.ع</span>
-          <span class="price-was">37,000 د.ع</span>
-        </div>
-      </div>
-    </article>
 
-    <!-- PRODUCT 11 -->
-    <article class="work-item reveal-up" data-category="men" data-delay="100">
-      <div class="work-img">
-        <img src="https://images.unsplash.com/photo-1594938298603-c8148c4b4057?w=600&q=80&fit=crop" alt="Hiwa Celebration Suit" loading="lazy"/>
-        <div class="work-overlay">
-          <button class="work-add" onclick="addToCart('بدلة هيوا الاحتفالية', 72000,'🥻','#2d5a1a')">Add to Cart</button>
-        </div>
       </div>
-      <div class="work-info">
-        <div class="work-meta">
-          <span class="work-cat">Men's Suit</span>
-          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
-        </div>
-        <h4 class="work-name">Hiwa Celebration Suit</h4>
-        <div class="work-price">
-          <span class="price-now">72,000 د.ع</span>
-          <span class="price-was">102,000 د.ع</span>
-        </div>
-      </div>
-    </article>
+    </section>
 
-    <!-- PRODUCT 12 -->
-    <article class="work-item reveal-up" data-category="women" data-delay="300">
-      <div class="work-img">
-        <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&q=80&fit=crop" alt="Rewşen Velvet Top" loading="lazy"/>
-        <div class="work-overlay">
-          <button class="work-add" onclick="addToCart('بلوزة ريوشن المخملية', 43000,'🩱','#9e1b6e')">Add to Cart</button>
-        </div>
-      </div>
-      <div class="work-info">
-        <div class="work-meta">
-          <span class="work-cat">Women's Top</span>
-          <button class="wish-btn" onclick="toggleWish(this)">♡</button>
-        </div>
-        <h4 class="work-name">Rewşen Velvet Top</h4>
-        <div class="work-price">
-          <span class="price-now">43,000 د.ع</span>
-          <span class="price-was">63,000 د.ع</span>
-        </div>
-      </div>
-    </article>
+    <!-- SECTION 03: HERITAGE STORY & GENERATIONAL CREDENTIALS -->
+    <section class="story-section" id="heritage">
+      <div class="container">
+        <div class="story-grid">
+          
+          <div class="story-left">
+            <p class="section-eyebrow">Generational Heritage</p>
+            <h2 class="story-heading">
+              Born in<br/>
+              <em>Baghdad.</em><br/>
+              Crafted for<br/>
+              royalty.
+            </h2>
+          </div>
 
+          <div class="story-right">
+            <div class="story-body-text">
+              <p class="lead">
+                Since 1954 along the historic banks of the Tigris in Al-Karrada, Baghdadia has guarded the sacred formulas of Mesopotamian pastry-making.
+              </p>
+              <p>
+                While industrial patisseries turned to hydrogenated vegetable shortening and artificial flavorings, our hearths remain steadfast. We use only 100% clarified sheep ghee (دهن حر) from northern pastures, hand-pitted Zahdi dates from Karbala orchards, green cardamom pods crushed fresh at dawn, and water-buffalo ashta sourced daily.
+              </p>
+              <p>
+                Every tray of Daheen, every diamond of Samoon, and every golden crescent of Kleicha carries the fragrance of a seventy-year tradition of Iraqi hospitality (كرم الضيافة البغدادي).
+              </p>
+            </div>
+
+            <div class="story-credentials-grid">
+              <div class="cred-card">
+                <strong>4x</strong>
+                <span>Baghdad Golden Tannour</span>
+              </div>
+              <div class="cred-card">
+                <strong>100%</strong>
+                <span>Clarified Sheep Ghee</span>
+              </div>
+              <div class="cred-card">
+                <strong>72 Yrs</strong>
+                <span>Continuous Heritage</span>
+              </div>
+              <div class="cred-card">
+                <strong>5.0 ★</strong>
+                <span>1,400+ Local Reviews</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 04: THE 5 VALUE PILLARS (Qream Numbered Accordion/List) -->
+    <section class="excellence-section">
+      <div class="container">
+        <p class="section-eyebrow">Our Unbroken Rules</p>
+        <h2 class="section-main-heading">
+          Five pillars of <em>uncompromising quality.</em>
+        </h2>
+
+        <div class="excellence-list">
+          
+          <div class="excellence-item">
+            <div class="excellence-title">Pure Iraqi Dihin Hor</div>
+            <div class="excellence-desc">Zero margarine, palm oils, or hydrogenated substitutes. Only grass-fed clarified sheep butter for incomparable aroma.</div>
+            <div class="excellence-num">01</div>
+          </div>
+
+          <div class="excellence-item">
+            <div class="excellence-title">450°C Refractory Ovens</div>
+            <div class="excellence-desc">Stone hearths and clay tannour walls that impart authentic blistered crackle and wood-fired character to every loaf.</div>
+            <div class="excellence-num">02</div>
+          </div>
+
+          <div class="excellence-item">
+            <div class="excellence-title">Karbala Zahdi Dates</div>
+            <div class="excellence-desc">Single-origin dates slow-simmered with cardamom seeds and toasted sesame, retaining deep caramel undertones.</div>
+            <div class="excellence-num">03</div>
+          </div>
+
+          <div class="excellence-item">
+            <div class="excellence-title">Twice-Daily Fresh Batches</div>
+            <div class="excellence-desc">Baking shifts at 6:00 AM and 4:00 PM. No day-old pastries or chilled shelf inventory. Fresh from the flame.</div>
+            <div class="excellence-num">04</div>
+          </div>
+
+          <div class="excellence-item">
+            <div class="excellence-title">Royal Diyafa Packaging</div>
+            <div class="excellence-desc">Heavy-gauge embossed brass and gold-foil presentation tins designed to dignify wedding banquets and state gifts.</div>
+            <div class="excellence-num">05</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CUSTOMER REVIEWS CONTINUOUS MARQUEE -->
+    <div class="reviews-section">
+      <div class="reviews-marquee-track">
+        
+        <div class="rcard-bubble">
+          <div class="rcard-stars">★★★★★</div>
+          <p class="rcard-quote">"My grandmother closed her eyes and took one bite of the Kleicha—she said it tasted exactly like 1960s Karrada. Pure magic."</p>
+          <span class="rcard-author">Dr. Mustafa Al-Rawi — Baghdad</span>
+        </div>
+
+        <div class="rcard-bubble">
+          <div class="rcard-stars">★★★★★</div>
+          <p class="rcard-quote">"The Daheen Najafi arrived warm in Erbil with the ghee still glistening. Unmatched quality, rich coconut, and real sheep butter."</p>
+          <span class="rcard-author">Rebin K. — Dream City, Erbil</span>
+        </div>
+
+        <div class="rcard-bubble">
+          <div class="rcard-stars">★★★★★</div>
+          <p class="rcard-quote">"Ordered 25 Royal Gift Tins for our Eid corporate delegation. The brass presentation and taste blew everyone away."</p>
+          <span class="rcard-author">Zahra Al-Husseini — Basra</span>
+        </div>
+
+        <div class="rcard-bubble">
+          <div class="rcard-stars">★★★★★</div>
+          <p class="rcard-quote">"The Kahi and Geymar on Friday morning is non-negotiable in our house. Flakiest pastry in Iraq by far."</p>
+          <span class="rcard-author">Ahmed Al-Jubouri — Al-Mansour</span>
+        </div>
+
+        <div class="rcard-bubble">
+          <div class="rcard-stars">★★★★★</div>
+          <p class="rcard-quote">"Stone-baked Samoon that shatters like glass when bitten, yet stays so soft inside. You can't fake this level of craft."</p>
+          <span class="rcard-author">Noor T. — Karbala</span>
+        </div>
+
+        <!-- Duplicated for seamless loop -->
+        <div class="rcard-bubble">
+          <div class="rcard-stars">★★★★★</div>
+          <p class="rcard-quote">"My grandmother closed her eyes and took one bite of the Kleicha—she said it tasted exactly like 1960s Karrada. Pure magic."</p>
+          <span class="rcard-author">Dr. Mustafa Al-Rawi — Baghdad</span>
+        </div>
+
+        <div class="rcard-bubble">
+          <div class="rcard-stars">★★★★★</div>
+          <p class="rcard-quote">"The Daheen Najafi arrived warm in Erbil with the ghee still glistening. Unmatched quality, rich coconut, and real sheep butter."</p>
+          <span class="rcard-author">Rebin K. — Dream City, Erbil</span>
+        </div>
+
+        <div class="rcard-bubble">
+          <div class="rcard-stars">★★★★★</div>
+          <p class="rcard-quote">"Ordered 25 Royal Gift Tins for our Eid corporate delegation. The brass presentation and taste blew everyone away."</p>
+          <span class="rcard-author">Zahra Al-Husseini — Basra</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SECTION 05: INTERACTIVE CATERING / COLLAB FORM (Qream Style) -->
+    <section class="collab-section" id="collab">
+      <div class="container">
+        <div class="collab-container">
+          
+          <div class="collab-left">
+            <p class="section-eyebrow">Bespoke Orders & Catering</p>
+            <h2>LET'S CREATE <span>SOMETHING SWEET.</span></h2>
+            <p>
+              Planning an Iraqi wedding banquet, Ramadan gathering, or VIP state reception? Our master bakers craft bespoke dessert tables, warm daheen stations, and engraved gift boxes.
+            </p>
+            <div class="collab-direct-contact">
+              <span>Direct Concierge:</span>
+              <a href="tel:+9647701234567">📞 +964 770 123 4567</a>
+              <a href="https://wa.me/9647701234567" target="_blank" rel="noopener">💬 WhatsApp Master Baker</a>
+              <a href="mailto:catering@baghdadia.iq">✉️ catering@baghdadia.iq</a>
+            </div>
+          </div>
+
+          <div class="collab-form-box">
+            <form id="collab-form" onsubmit="handleCollabSubmit(event)">
+              
+              <div class="form-field-group">
+                <label>Occasion / Event Type</label>
+                <div class="pill-selector-row">
+                  <button type="button" class="choice-pill-btn selected" data-occasion="eid">Eid Celebration</button>
+                  <button type="button" class="choice-pill-btn" data-occasion="wedding">Wedding & Dawra</button>
+                  <button type="button" class="choice-pill-btn" data-occasion="gift">VIP Gift Chests</button>
+                  <button type="button" class="choice-pill-btn" data-occasion="corporate">Corporate Diyafa</button>
+                </div>
+              </div>
+
+              <div class="form-field-group">
+                <label>Estimated Budget (IQD)</label>
+                <div class="pill-selector-row">
+                  <button type="button" class="choice-pill-btn selected" data-budget="35-75">35,000 — 75,000 د.ع</button>
+                  <button type="button" class="choice-pill-btn" data-budget="75-200">75,000 — 200,000 د.ع</button>
+                  <button type="button" class="choice-pill-btn" data-budget="250+">250,000+ د.ع</button>
+                </div>
+              </div>
+
+              <div class="form-field-group">
+                <label>Your Name</label>
+                <input type="text" class="collab-input" placeholder="e.g. Ali Al-Baghdadi" required/>
+              </div>
+
+              <div class="form-field-group">
+                <label>Phone / WhatsApp Number (+964)</label>
+                <input type="tel" class="collab-input" placeholder="+964 770 000 0000" required/>
+              </div>
+
+              <div class="form-field-group">
+                <label>Delivery City & Date</label>
+                <input type="text" class="collab-input" placeholder="e.g. Baghdad (Al-Mansour) — Next Thursday" required/>
+              </div>
+
+              <div class="form-field-group">
+                <label>Custom Requests or Quantities</label>
+                <textarea class="collab-input" rows="3" placeholder="Tell us about special pastry selections, dietary requests, or presentation style..."></textarea>
+              </div>
+
+              <button type="submit" class="collab-submit-btn">
+                Request Catering Proposal →
+              </button>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 06: MASSIVE EDITORIAL FOOTER -->
+    <footer class="footer-main" id="contact">
+      <div class="container">
+        
+        <div class="footer-top-grid">
+          
+          <div class="footer-brand-col">
+            <a href="#hero" class="f-logo">BAGHDADIA<span>.</span></a>
+            <p class="f-tagline">
+              Artisanal Mesopotamian bakes, stone-hearth breads, and royal confectionery crafted since 1954.
+            </p>
+            <div class="footer-pay-badges">
+              <span class="pay-badge">Cash on Delivery</span>
+              <span class="pay-badge">ZainCash</span>
+              <span class="pay-badge">Qi Card</span>
+              <span class="pay-badge">Visa</span>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h5>Traditional Menu</h5>
+            <ul>
+              <li><a href="#products">Baghdadi Kleicha</a></li>
+              <li><a href="#products">Daheen Najafi</a></li>
+              <li><a href="#products">Zenood El Sit</a></li>
+              <li><a href="#products">Kahi & Geymar Arab</a></li>
+              <li><a href="#products">Stone-Hearth Samoon</a></li>
+              <li><a href="#products">Pistachio Baqlawa</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h5>Hearth Locations</h5>
+            <ul>
+              <li><a href="#">Karrada Al-Sharqiya, Baghdad</a></li>
+              <li><a href="#">Al-Mutanabbi Street, Baghdad</a></li>
+              <li><a href="#">Dream City Mall, Erbil</a></li>
+              <li><a href="#">Corniche Street, Basra</a></li>
+              <li><a href="#">Old Grand Bazaar, Najaf</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h5>Hours & Service</h5>
+            <ul>
+              <li><a href="#">Daily: 6:00 AM — 11:30 PM</a></li>
+              <li><a href="#">Morning Batch: 6:00 AM</a></li>
+              <li><a href="#">Evening Batch: 4:00 PM</a></li>
+              <li><a href="tel:+9647701234567">+964 770 123 4567</a></li>
+              <li><a href="mailto:hello@baghdadia.iq">hello@baghdadia.iq</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Giant Typography Wordmark (Qream Signature) -->
+        <div class="footer-giant-wordmark">
+          <div class="giant-text">BAGHDADIA</div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom-bar">
+          <span>© 2026 BAGHDADIA Artisanal Bakery. Handcrafted with pride in Baghdad & Erbil, Iraq.</span>
+          <span>Designed with high-fashion Mesopotamian aesthetic.</span>
+        </div>
+
+      </div>
+    </footer>
+
+  </div><!-- /scroll-content-wrapper -->
+
+
+  <!-- ============================================================
+       PRODUCT DETAIL QUICK VIEW MODAL
+       ============================================================ -->
+  <div class="modal-backdrop" id="product-modal-backdrop" onclick="if(event.target===this) closeProductModal()">
+    <div class="product-modal-card">
+      <button class="modal-close-trigger" onclick="closeProductModal()" aria-label="Close">✕</button>
+      
+      <div class="modal-image-col">
+        <img id="modal-img" src="" alt="Product"/>
+      </div>
+
+      <div class="modal-details-col">
+        <div>
+          <div class="modal-tag-row">
+            <span class="modal-cat-tag" id="modal-category">Category</span>
+            <span class="pcard-tag-badge" id="modal-badge">Badge</span>
+          </div>
+
+          <div class="modal-title-wrap" style="margin-top: 10px;">
+            <h3 id="modal-title">Product Name</h3>
+            <div class="modal-arabic" id="modal-arabic">الاسم العربي</div>
+          </div>
+
+          <div class="modal-price-box" style="margin-top: 14px;">
+            <span class="m-now" id="modal-price-now">0 د.ع</span>
+            <span class="m-was" id="modal-price-was">0 د.ع</span>
+          </div>
+
+          <p class="modal-desc-full" id="modal-desc" style="margin-top: 16px;"></p>
+
+          <div class="modal-ingredients-badge" style="margin-top: 16px;">
+            <strong>Heritage Ingredients:</strong>
+            <span id="modal-ingredients"></span>
+          </div>
+
+          <div class="modal-ingredients-badge" style="margin-top: 10px;">
+            <strong>Serving Recommendation:</strong>
+            <span id="modal-serving"></span>
+          </div>
+
+          <div style="font-size: 0.8rem; color: var(--cream-dim); margin-top: 10px;">
+            <strong>Pack Size:</strong> <span id="modal-weight"></span>
+          </div>
+        </div>
+
+        <div class="modal-actions-row">
+          <div class="modal-qty-counter">
+            <button class="qty-btn" onclick="changeModalQty(-1)">−</button>
+            <span class="qty-val" id="modal-qty-val">1</span>
+            <button class="qty-btn" onclick="changeModalQty(1)">+</button>
+          </div>
+          <button class="modal-add-btn" onclick="addModalItemToCart()">
+            Add to Order Bag →
+          </button>
+        </div>
+
+      </div>
+    </div>
   </div>
-</section>
 
-<!-- ░░░ ABOUT STRIP ░░░ -->
-<section class="about" id="about">
-  <div class="about-inner">
-    <div class="about-left reveal-up">
-      <div class="section-label">Our story</div>
-      <h2 class="about-title">Born from<br/><em>Kurdistan.</em><br/>Made for the world.</h2>
+
+  <!-- ============================================================
+       SLIDE-OVER SHOPPING CART DRAWER
+       ============================================================ -->
+  <div class="cart-backdrop" id="cart-backdrop" onclick="closeCartDrawer()"></div>
+
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <h3>Fresh Order Bag <span id="drawer-items-count">(0)</span></h3>
+      <button class="cart-close-btn" onclick="closeCartDrawer()" aria-label="Close Cart">✕</button>
     </div>
-    <div class="about-right reveal-up" data-delay="150">
-      <p>We are a Kurdish heritage clothing brand based in Erbil, Kurdistan Region. Every piece we sell tells a story — a story of mountains, colors, and generations of craftsmanship.</p>
-      <p>We believe traditional clothing shouldn't cost a fortune. Our mission is to make authentic Kurdish fashion accessible to Kurds everywhere, from Erbil to Berlin to Los Angeles.</p>
-      <div class="about-awards">
-        <div class="award-item">
-          <span class="award-num">500+</span>
-          <span class="award-text">Products available</span>
+
+    <div class="cart-drawer-body">
+      <!-- Empty State -->
+      <div class="cart-empty-state" id="cart-empty-state">
+        <div class="empty-icon">🥮</div>
+        <h4>Your bakery bag is empty</h4>
+        <p>Explore our fresh stone-hearth bakes and royal confectionery.</p>
+        <button class="nav-pill-btn" onclick="closeCartDrawer(); location.href='#products'">
+          Explore Menu →
+        </button>
+      </div>
+
+      <!-- Item Rows Container -->
+      <div id="cart-items-list"></div>
+    </div>
+
+    <div class="cart-drawer-footer">
+      <div class="cart-delivery-selector">
+        <label>Select Delivery Governorate</label>
+        <select class="city-select-box" id="cart-city-select">
+          <option value="baghdad">Baghdad — Express Same Day (4,000 د.ع)</option>
+          <option value="erbil">Erbil — Express Same Day (5,000 د.ع)</option>
+          <option value="basra">Basra — Overnight Express (6,000 د.ع)</option>
+          <option value="najaf">Najaf & Karbala — Same Day (5,000 د.ع)</option>
+          <option value="sulaymaniyah">Sulaymaniyah — 24h Express (6,000 د.ع)</option>
+          <option value="other">Other Governorates — 24h Courier (6,000 د.ع)</option>
+        </select>
+      </div>
+
+      <div class="cart-totals-breakdown">
+        <div class="total-line">
+          <span>Pastry Subtotal</span>
+          <span id="cart-subtotal-val">0 د.ع</span>
         </div>
-        <div class="award-item">
-          <span class="award-num">10K+</span>
-          <span class="award-text">Happy customers</span>
+        <div class="total-line">
+          <span>Fresh Hearth Delivery</span>
+          <span id="cart-delivery-val">0 د.ع</span>
         </div>
-        <div class="award-item">
-          <span class="award-num">30+</span>
-          <span class="award-text">Countries shipped</span>
-        </div>
-        <div class="award-item">
-          <span class="award-num">5★</span>
-          <span class="award-text">Average review</span>
+        <div class="total-line grand">
+          <span>Grand Total</span>
+          <span id="cart-grandtotal-val">0 د.ع</span>
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- ░░░ REVIEWS MARQUEE ░░░ -->
-<div class="reviews-wrap">
-  <div class="reviews-track">
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p>"The fabric quality is incredible. Everyone at Nowruz was asking where I got it."</p>
-      <span>— Sara M., Germany</span>
+      <button class="checkout-action-btn" onclick="handleCheckout()">
+        Proceed to Checkout (الدفع عند الاستلام) →
+      </button>
     </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p>"Best price for authentic Kurdish clothing I've ever found online."</p>
-      <span>— Ahmad K., Sweden</span>
-    </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p>"Ordered kids' outfits for a wedding — perfect. Fast shipping, beautiful packaging."</p>
-      <span>— Lana R., UK</span>
-    </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p>"My mother said 'just like back home.' That's the highest compliment possible."</p>
-      <span>— Heval A., USA</span>
-    </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p>"The red Dilan dress is stunning. So worth it at this price!"</p>
-      <span>— Rêzan O., Netherlands</span>
-    </div>
-    <!-- duplicate for seamless loop -->
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p>"The fabric quality is incredible. Everyone at Nowruz was asking where I got it."</p>
-      <span>— Sara M., Germany</span>
-    </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p>"Best price for authentic Kurdish clothing I've ever found online."</p>
-      <span>— Ahmad K., Sweden</span>
-    </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p>"Ordered kids' outfits for a wedding — perfect. Fast shipping, beautiful packaging."</p>
-      <span>— Lana R., UK</span>
-    </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p>"My mother said 'just like back home.' That's the highest compliment possible."</p>
-      <span>— Heval A., USA</span>
-    </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p>"The red Dilan dress is stunning. So worth it at this price!"</p>
-      <span>— Rêzan O., Netherlands</span>
-    </div>
-  </div>
-</div>
+  </aside>
 
-<!-- ░░░ CTA ░░░ -->
-<section class="cta-section">
-  <div class="cta-inner reveal-up">
-    <h2 class="cta-title">Ready to wear<br/><em>your heritage?</em></h2>
-    <a href="#work" class="btn-main btn-main--light">
-      <span>Start Shopping</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
-  </div>
-</section>
 
-<!-- ░░░ FOOTER ░░░ -->
-<footer class="footer">
-  <div class="footer-top">
-    <div class="footer-logo">KRDM<span>.</span></div>
-    <div class="footer-links-grid">
-      <div>
-        <div class="footer-col-title">Shop</div>
-        <a href="#work">Women's</a>
-        <a href="#work">Men's</a>
-        <a href="#work">Children's</a>
-        <a href="#work">Bridal</a>
-        <a href="#work">Accessories</a>
+  <!-- ============================================================
+       CHECKOUT SUCCESS MODAL
+       ============================================================ -->
+  <div class="modal-backdrop" id="checkout-success-modal" onclick="if(event.target===this) closeSuccessModal()">
+    <div class="success-dialog-card">
+      <div class="success-icon-seal">✓</div>
+      <h3>Order Received! (تم استلام طلبك)</h3>
+      <p>
+        Our master bakers have received your fresh order and will begin packaging immediately from our stone hearths.
+      </p>
+      <div class="success-order-id">
+        Order ID: <span id="success-order-id-val">#BGH-5821</span>
       </div>
-      <div>
-        <div class="footer-col-title">Help</div>
-        <a href="#">Size Guide</a>
-        <a href="#">Shipping Info</a>
-        <a href="#">Returns</a>
-        <a href="#">Track Order</a>
-        <a href="#">FAQ</a>
-      </div>
-      <div>
-        <div class="footer-col-title">Contact</div>
-        <a href="mailto:hello@krdmforsale.com">hello@krdmforsale.com</a>
-        <a href="tel:+9647501234567">+964 750 123 4567</a>
-        <a href="#">Erbil, Kurdistan Region</a>
-        <a href="#">Instagram</a>
-        <a href="#">TikTok</a>
-      </div>
+      <p style="font-size: 0.85rem; color: var(--cream-dim);">
+        Our delivery driver will reach out via WhatsApp before dispatch. Cash on delivery accepted.
+      </p>
+      <button class="nav-pill-btn" onclick="closeSuccessModal()" style="margin-top: 10px;">
+        Back to Bakery Hearth
+      </button>
     </div>
   </div>
-  <div class="footer-bottom">
-    <span>© 2026 KRDM For Sale. Made with pride in Kurdistan.</span>
-    <div class="footer-pay">
-      <span>VISA</span><span>MC</span><span>PayPal</span>
-    </div>
-  </div>
-</footer>
 
-<!-- ░░░ CART DRAWER ░░░ -->
-<div class="cart-backdrop" id="cart-backdrop" onclick="closeCart()"></div>
-<aside class="cart-drawer" id="cart-drawer">
-  <div class="cart-head">
-    <h3>Cart <span id="cart-head-count">(0)</span></h3>
-    <button onclick="closeCart()">✕</button>
-  </div>
-  <div class="cart-body" id="cart-body">
-    <div class="cart-empty-state" id="cart-empty-state">
-      <span>Your cart is empty</span>
-      <button onclick="closeCart();document.querySelector('#work').scrollIntoView({behavior:'smooth'})">Start shopping →</button>
-    </div>
-  </div>
-  <div class="cart-foot" id="cart-foot">
-    <div class="cart-total-row">
-      <span>Total</span>
-      <span id="cart-total-price">0 د.ع</span>
-    </div>
-    <button class="btn-checkout" onclick="checkout()">Checkout →</button>
-  </div>
-</aside>
 
-<!-- ░░░ TOAST ░░░ -->
-<div class="toast" id="toast"></div>
+  <!-- ============================================================
+       FLOATING TOAST NOTIFICATION
+       ============================================================ -->
+  <div class="toast-notice" id="toast-notice"></div>
 
-<script src="js/main.js"></script>
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
 </body>
 </html>
